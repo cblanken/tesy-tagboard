@@ -5,35 +5,21 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.urls import include
 from django.urls import path
 from django.views import defaults as default_views
-from django.views.generic import TemplateView
 from drf_spectacular.views import SpectacularAPIView
 from drf_spectacular.views import SpectacularSwaggerView
 from rest_framework.authtoken.views import obtain_auth_token
 
+from tesys_tagboard import views
+
 urlpatterns = [
-    path("", TemplateView.as_view(template_name="pages/home.html"), name="home"),
-    path(
-        "about/",
-        TemplateView.as_view(template_name="pages/about.html"),
-        name="about",
-    ),
+    path("", views.home, name="home"),
+    path("about/", views.about, name="about"),
+    path("posts/", views.posts, name="posts"),
+    path("tags/", views.tags, name="tags"),
+    path("upload/", views.upload, name="upload"),
+    path("help/", views.search_help, name="help"),
     # Django Admin, use {% url 'admin:index' %}
     path(settings.ADMIN_URL, admin.site.urls),
-    path(
-        "posts/",
-        TemplateView.as_view(template_name="pages/posts.html"),
-        name="posts",
-    ),
-    path(
-        "tags/",
-        TemplateView.as_view(template_name="pages/tags.html"),
-        name="tags",
-    ),
-    path(
-        "search/",
-        TemplateView.as_view(template_name="pages/search.html"),
-        name="search",
-    ),
     # User management
     path("users/", include("tesys_tagboard.users.urls", namespace="users")),
     path("accounts/", include("allauth.urls")),

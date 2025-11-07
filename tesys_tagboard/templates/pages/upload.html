@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}
+  {{ block.super }} — Upload
+{% endblock title %}
+{% block content %}
+  <div class="flex gap-4">
+    <form action="{% url 'upload' %}"
+          method="post"
+          enctype="multipart/form-data"
+          class="flex gap-4 items-center">
+      {% csrf_token %}
+      {{ form }}
+      <input type="submit" value="Upload" class="text-xl btn btn-primary" />
+    </form>
+  </div>
+{% endblock content %}

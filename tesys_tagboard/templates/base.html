@@ -1,4 +1,4 @@
-{% load static i18n %}
+{% load static i18n tailwind_tags %}
 
 <!DOCTYPE html>
 {% get_current_language as LANGUAGE_CODE %}
@@ -16,6 +16,7 @@
           content="A self-hosted Booru and media tagging application" />
     <meta name="author" content="Cameron Blankenbuehler" />
     <link rel="icon" href="{% static 'images/favicons/favicon.ico' %}" />
+    {% tailwind_css %}
     {% block css %}
       <link href="{% static 'css/project.css' %}" rel="stylesheet" />
       <link href="{% static 'css/dist/styles.css' %}" rel="stylesheet" />
@@ -54,7 +55,7 @@
         </div>
         <div class="navbar-end"></div>
       </nav>
-      <div class="container m-8 sm:w-full lg:max-w-1600px">
+      <div class="flex justify-center p-4 sm:w-full lg:max-w-1600px">
         {% if messages %}
           {% for message in messages %}
             <div class="alert alert-dismissible {% if message.tags %}alert-{{ message.tags }}{% endif %}">
@@ -67,12 +68,13 @@
           {% endfor %}
         {% endif %}
         {% block main %}
-          {% block content %}
-          {% endblock content %}
+          <main>
+            {% block content %}
+            {% endblock content %}
+          </main>
         {% endblock main %}
       </div>
     {% endblock body %}
-    <!-- /container -->
     {% block modal %}
     {% endblock modal %}
     {% block inline_javascript %}

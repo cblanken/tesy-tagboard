@@ -1,35 +1,28 @@
 {% load static i18n %}
 
 <li>
-  <a class="link link-hover" href="{% url 'home' %}">Home</a>
+  <a class="text-2xl link link-hover" href="{% url 'home' %}">Home</a>
 </li>
 <li>
-  <a class="link link-hover" href="{% url 'about' %}">About</a>
+  <a class="text-2xl link link-hover" href="{% url 'about' %}">About</a>
 </li>
 <li>
-  <a class="link link-hover" href="{% url 'posts' %}">Posts</a>
+  <a class="text-2xl link link-hover" href="{% url 'posts' %}">Posts</a>
 </li>
 <li>
-  <details>
-    <summary>Search</summary>
-    <ul class="p-2">
-      <li>
-        <a>Tags</a>
-      </li>
-      <li>
-        <a>Advanced Search</a>
-      </li>
-    </ul>
-  </details>
+  <a class="text-2xl link link-hover" href="{% url 'upload' %}">Upload</a>
+</li>
+<li>
+  <a class="text-2xl link link-hover" href="{% url 'help' %}">Help</a>
 </li>
 {% if request.user.is_authenticated %}
   <li>
-    <a class="link link-hover"
+    <a class="text-2xl link link-hover"
        href="{% url 'users:detail' request.user.username %}">{% translate "Profile" %}</a>
   </li>
   {# URL provided by django-allauth/account/urls.py #}
   <li>
-    <a class="link link-hover" href="{% url 'account_logout' %}">{% translate "Sign Out" %}</a>
+    <a class="text-2xl link link-hover" href="{% url 'account_logout' %}">{% translate "Sign Out" %}</a>
   </li>
 {% else %}
   {% if ACCOUNT_ALLOW_REGISTRATION %}
