@@ -1,5 +1,6 @@
 from django.core.files.uploadedfile import UploadedFile
 from django.http import HttpRequest
+from django.shortcuts import get_object_or_404
 from django.template.response import TemplateResponse
 from django_htmx.middleware import HtmxDetails
 
@@ -24,8 +25,15 @@ def about(request: HtmxHttpRequest) -> TemplateResponse:
     return TemplateResponse(request, "pages/about.html", context)
 
 
+def post(request: HtmxHttpRequest, media_id: int) -> TemplateResponse:
+    post = get_object_or_404(Post.objects.filter(media__id=media_id))
+    context = {"post": post}
+    return TemplateResponse(request, "pages/post.html", context)
+
+
 def posts(request: HtmxHttpRequest) -> TemplateResponse:
-    context = {}
+    posts = Post.objects.all()
+    context = {"posts": posts}
     return TemplateResponse(request, "pages/posts.html", context)
 
 
@@ -39,19 +47,8 @@ def handle_media_upload(file: UploadedFile | None, src_url: str | None) -> Media
     if file is None:
         msg = "A file must be provided to upload"
         raise ValueError(msg)
-    if file.name:
-        try:
-            ext = file.name.split(".")[-1]
-        except IndexError as e:
-            msg = "Uploaded files must have a (dot) extension"
-            raise ValueError(msg) from e
-
-    else:
-        msg = "Uploaded files must have a name"
-        raise ValueError(msg)
-
     try:
-        mediatype = MediaType.objects.get(name__icontains=ext)
+        mediatype = MediaType.objects.get(template=file.content_type)
     except MediaType.DoesNotExist as e:
         msg = "That file extension is not supported"
         raise ValueError(msg) from e

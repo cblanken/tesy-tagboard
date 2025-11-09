@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}
+  {{ block.super }} — Posts
+{% endblock title %}
+{% block content %}
+  <div class="flex flex-wrap gap-4 justify-center">
+    <img class="bg-slate-200 border-2 rounded-md max-h-[1000px] max-w-[70%] object-cover"
+         src="{{ post.media.image.file.url }}"
+         alt="image" />
+  </img />
+  <div class="text-xl">
+    <div>Uploader: {{ post.uploader.username }}</div>
+    <div>Post date: {{ post.post_date }}</div>
+    <div>Source: {{ post.media.src_url }}</div>
+    <div class="flex flex-wrap max-w-[70%]">
+      {% for tag in tags %}<div>{{ tag.name }}</div>{% endfor %}
+    </div>
+  </div>
+</div>
+{% endblock content %}

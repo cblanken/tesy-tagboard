@@ -135,7 +135,7 @@ class Media(models.Model):
     type = models.ForeignKey(MediaType, on_delete=models.CASCADE)
     upload_date = models.DateTimeField(default=now, editable=False)
     edit_date = models.DateTimeField(auto_now=True)
-    src_url = models.URLField(max_length=255, unique=True)
+    src_url = models.URLField(max_length=255)
 
     class Meta:
         verbose_name_plural = "media"

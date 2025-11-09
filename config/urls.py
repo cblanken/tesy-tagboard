@@ -15,6 +15,7 @@ urlpatterns = [
     path("", views.home, name="home"),
     path("about/", views.about, name="about"),
     path("posts/", views.posts, name="posts"),
+    path("posts/<int:media_id>/", views.post, name="post"),
     path("tags/", views.tags, name="tags"),
     path("upload/", views.upload, name="upload"),
     path("help/", views.search_help, name="help"),

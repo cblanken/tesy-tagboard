@@ -1,8 +1,31 @@
 {% extends "base.html" %}
 
+{% load static %}
+
 {% block title %}
   {{ block.super }} — Posts
 {% endblock title %}
 {% block content %}
-  <h1>Posts</h1>
+  <div class="flex justify-center mb-4">
+    <label class="input">
+      <svg class="opacity-50 h-[1em]"
+           xmlns="http://www.w3.org/2000/svg"
+           viewBox="0 0 24 24">
+        <g stroke-linejoin="round" stroke-linecap="round" stroke-width="2.5" fill="none" stroke="currentColor">
+        <circle cx="11" cy="11" r="8"></circle>
+        <path d="m21 21-4.3-4.3" />
+        </g>
+      </svg>
+      <input type="search" required placeholder="Search" />
+    </label>
+  </div>
+  <div class="flex flex-wrap gap-4 justify-center">
+    {% for post in posts %}
+      <a href="{% url "post" media_id=post.media.id %}">
+        <img class="object-cover rounded-md border-2 bg-slate-200 w-[400px] h-[400px]"
+             src="{{ post.media.image.file.url }}"
+             alt="image" />
+      </a>
+    {% endfor %}
+  </div>
 {% endblock content %}
