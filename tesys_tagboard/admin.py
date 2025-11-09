@@ -16,7 +16,7 @@ from .models import Video
 
 @admin.register(TagCategory)
 class TagCategoryAdmin(admin.ModelAdmin):
-    list_display = ["category", "prefix"]
+    list_display = ["pk", "category", "prefix"]
     search_fields = ["category", "prefix"]
     list_filter = ["category"]
     ordering = ["prefix"]
@@ -30,7 +30,7 @@ class TagCategoryAdmin(admin.ModelAdmin):
 
 @admin.register(Tag)
 class TagAdmin(admin.ModelAdmin):
-    list_display = ["name", "category"]
+    list_display = ["pk", "name", "category"]
     search_fields = ["name", "category__name"]
     list_filter = ["category"]
 
@@ -95,7 +95,6 @@ class PostAdmin(admin.ModelAdmin):
     list_display = [
         "uploader",
         "post_date",
-        "tags",
         "media__orig_name",
         "media__src_url",
     ]
