@@ -12,7 +12,7 @@ default:
 # build: Build python image.
 build:
     @echo "Building python image..."
-    @docker compose build
+    @docker compose --profile all build
 
 # up: Start up containers.
 up:
@@ -42,11 +42,11 @@ down-docs:
 # prune: Remove containers and their volumes.
 docker-prune-volumes *args:
     @echo "Killing containers and removing volumes..."
-    @docker compose down -v {{args}}
+    @docker compose --profile all down -v {{args}}
 
 # logs: View container logs
 docker-logs *args:
-    @docker compose logs -f {{args}}
+    @docker compose --profile all logs -f {{args}}
 
 # test: run pytest(s)
 docker-test *args:
