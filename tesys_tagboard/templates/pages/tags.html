@@ -4,13 +4,17 @@
   {{ block.super }} — Tags
 {% endblock title %}
 {% block content %}
-  <div class="flex flex-col gap-4 p-8 w-full bg-slate-600">
+  <div class="flex flex-col gap-4 p-8 w-full rounded-sm bg-base-300">
     {% for cat, tags in tags_by_cat.items %}
       {% if tags %}
         <div>
           <h2 class="mb-2 text-3xl font-bold">{{ cat.get_category_display|capfirst }} tags</h2>
           <div class="flex gap-2">
-            {% for tag in tags %}<div class="py-1 px-2 text-lg bg-indigo-700 rounded-md">{{ tag.name }}</div>{% endfor %}
+            {% for tag in tags %}
+              <div class="py-1 px-2 text-lg rounded-md {% if cat.get_category_display == "basic" %}text-tag bg-tag-basic {% elif cat.get_category_display == "artist" %}text-tag bg-tag-artist {% elif cat.get_category_display == "copyright" %}text-tag bg-tag-copyright {% elif cat.get_category_display == "rating" %}text-tag bg-tag-rating {% else %}text-secondary-content bg-secondary {% endif %} ">
+                {{ tag.name }}
+              </div>
+            {% endfor %}
           </div>
         </div>
       {% endif %}

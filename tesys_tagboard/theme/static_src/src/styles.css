@@ -4,8 +4,125 @@
 @plugin "@tailwindcss/forms";
 @plugin "@tailwindcss/aspect-ratio";
 @plugin "@tailwindcss/typography";
+
 @plugin "daisyui" {
   themes: all;
   root: ":root";
   logs: true;
+}
+
+
+@theme {
+  /* Fonts */
+  --text-sm: 0.8rem;
+  --text-base: 1.0rem;
+  --text-lg: 1.25rem;
+  --text-xl: 1.4rem;
+  --text-2xl: 1.7rem;
+  --text-3xl: 2.2rem;
+  --text-4xl: 2.55rem;
+  --text-5xl: 3.65rem;
+
+  /* Colors */
+  --color-tag-basic: #a8e6cf;
+  --color-tag-rating: #ff8b94;
+  --color-tag-copyright: #ffd3b6;
+  --color-tag-artist: #bae1ff;
+  --color-tag: #383737; /* Tag text */
+
+  /* Keyframes */
+  @keyframes fade_in {
+    0% {
+      opacity: 0;
+    }
+
+    100%: {
+      opacity: 1;
+    }
+  }
+
+  @keyframes fade_out {
+    100% {
+      opacity: 0;
+    }
+  }
+
+  @keyframes flip180 {
+    0% {
+      transform: rotate(0);
+    }
+
+    100% {
+      transform: rotate(-180deg);
+    }
+  }
+
+  @keyframes rot90 {
+    0% {
+      transform: rotate(0);
+    }
+
+    100% {
+      transform: rotate(90deg);
+    }
+  }
+
+  @keyframes rot90_reverse {
+    0% {
+      transform: rotate(90deg);
+    }
+
+    100% {
+      transform: rotate(0deg);
+    }
+  }
+
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+  @keyframes spin_reverse {
+    0% {
+      transform: rotate(0);
+    }
+
+    100% {
+      transform: rotate(-360deg);
+    }
+  }
+
+  @keyframes pop_in {
+    0% {
+      transform: scale(0.4);
+      opacity: 0;
+    }
+
+    75% {
+      transform: scale(1.02);
+    }
+
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+
+  /* Animation */
+  --animate-rot-180: flip180 0.25s linear forwards;
+  --animate-rot-90: rot90 0.25s ease-in-out forwards;
+  --animate-rot-90-cc: rot90_reverse 0.25s ease-in-out forwards;
+  --animate-spin-slow: spin 2s linear infinite;
+  --animate-spin-slow-reverse: spin_reverse 2s linear infinite;
+  --animate-fade-in-slow: fade_in 3s ease-in-out forwards;
+  --animate-fade-in-fast: fade_in 1.5s ease-in-out forwards;
+  --animate-fade-in-very-fast: fade_in 0.4s ease-in-out forwards;
+  --animate-fade-out-slow: fade_out 3s ease-in-out forwards;
+  --animate-fade-out-fast: fade_out 1.5s ease-in-out forwards;
+  --animate-pop-in-fast: pop_in 0.7s ease-in-out forwards;
 }
