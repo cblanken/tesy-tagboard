@@ -13,6 +13,7 @@ from .models import Media
 from .models import Post
 from .models import Tag
 from .search import PostSearch
+from .search import tag_autocomplete
 
 
 class HtmxHttpRequest(HttpRequest):
@@ -56,15 +57,25 @@ def post_search_autocomplete(
 ) -> TemplateResponse | HttpResponseNotAllowed:
     if request.method == "GET":
         tag_prefixes = [key.lower() for key in TagCategory.__members__]
-        if query := request.GET.get("q"):
-            ps = PostSearch(query, tag_prefixes)
-            partial = request.GET.get("partial", "")
-            items = ps.autocomplete(partial)
-        else:
-            items = []
+        query = request.GET.get("q", "")
+        ps = PostSearch(query, tag_prefixes)
+        partial = request.GET.get("partial", "")
+        items = ps.autocomplete(partial)
 
         context = {"items": items}
         return TemplateResponse(request, "posts/search_autocomplete.html", context)
+
+    return HttpResponseNotAllowed(["GET"])
+
+
+def tag_search_autocomplete(
+    request: HtmxHttpRequest,
+) -> TemplateResponse | HttpResponseNotAllowed:
+    if request.method == "GET":
+        partial = request.GET.get("partial", "")
+        tags = tag_autocomplete(partial)
+        context = {"tags": tags}
+        return TemplateResponse(request, "tags/search_autocomplete.html", context)
 
     return HttpResponseNotAllowed(["GET"])
 

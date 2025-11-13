@@ -18,6 +18,7 @@ urlpatterns = [
     ),
     path("posts/<int:media_id>/", views.post, name="post"),
     path("tags/", views.tags, name="tags"),
+    path("tags/autocomplete/", views.tag_search_autocomplete, name="tag-autocomplete"),
     path("upload/", views.upload, name="upload"),
     path("help/", views.search_help, name="help"),
     # Django Admin, use {% url 'admin:index' %}

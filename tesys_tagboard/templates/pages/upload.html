@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 
+{% load component_tags %}
+
 {% block title %}
   {{ block.super }} — Upload
 {% endblock title %}
@@ -14,4 +16,5 @@
       <input type="submit" value="Post" class="text-xl btn btn-primary" />
     </form>
   </div>
+  <div class="flex">{% component "tag_search" / %}</div>
 {% endblock content %}

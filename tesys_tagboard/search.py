@@ -7,12 +7,23 @@ from itertools import chain
 from django.core import validators
 from django.core.exceptions import ValidationError
 from django.db.models import Q
+from django.db.models import QuerySet
 from django.utils.regex_helper import _lazy_re_compile
 from django.utils.translation import gettext_lazy as _
 
 from .enums import TagCategory
 from .models import Post
 from .models import Tag
+
+
+def tag_autocomplete(
+    partial: str, exclude_tag_names: list[str] | None = None
+) -> QuerySet[Tag]:
+    tags = Tag.objects.filter(Q(name__icontains=partial))
+    if exclude_tag_names is not None:
+        tags = tags.exclude(Q(name__in=exclude_tag_names))
+
+    return tags
 
 
 @dataclass
@@ -95,41 +106,36 @@ class PostSearch:
         self.exclude_tag_names = []
         for token in tokens:
             # Parse named tokens and simple tags
-            prefix, *rest = token.split(":")
-            negate: bool = prefix[0] == "-"
-            if len(rest) == 0 or prefix in tag_prefixes:
-                # Token with no prefix (category)
-                named_token = NamedToken(
-                    TokenCategory.tag, prefix, prefix="", negate=negate
-                )
-            elif len(rest) == 1:
-                # Token with a prefix
-                ttype = TokenCategory.select(prefix)
-                named_token = NamedToken(ttype, rest[0], prefix=prefix, negate=negate)
-            else:
-                msg = "Tokens may only contain a single colon ':'"
-                raise ValueError(msg)
-
-            if named_token.category is TokenCategory.tag:
-                if negate:
-                    self.exclude_tag_names.append(named_token.value)
+            if len(token) > 0:
+                prefix, *rest = token.split(":")
+                negate: bool = prefix[0] == "-"
+                if len(rest) == 0 or prefix in tag_prefixes:
+                    # Token with no prefix (category)
+                    named_token = NamedToken(
+                        TokenCategory.tag, prefix, prefix="", negate=negate
+                    )
+                elif len(rest) == 1:
+                    # Token with a prefix
+                    ttype = TokenCategory.select(prefix)
+                    named_token = NamedToken(
+                        ttype, rest[0], prefix=prefix, negate=negate
+                    )
                 else:
-                    self.include_tag_names.append(named_token.value)
+                    msg = "Tokens may only contain a single colon ':'"
+                    raise ValueError(msg)
+
+                if named_token.category is TokenCategory.tag:
+                    if negate:
+                        self.exclude_tag_names.append(named_token.value)
+                    else:
+                        self.include_tag_names.append(named_token.value)
 
     def autocomplete(self, partial: str = "") -> Iterable[AutocompleteItem]:
         """Return autocomplete matches base on existing search query and
         the provided `partial`"""
-        if partial:
-            tags = Tag.objects.filter(name__icontains=partial).exclude(
-                Q(name__in=self.exclude_tag_names) | Q(name__in=self.include_tag_names)
-            )
-
-        else:
-            tags = Tag.objects.exclude(
-                (Q(name__in=self.exclude_tag_names))
-                | Q(name__in=self.include_tag_names)
-            )
-
+        tags = tag_autocomplete(
+            partial, self.exclude_tag_names + self.include_tag_names
+        )
         return chain(
             (
                 AutocompleteItem(TokenCategory.tag, tag.name, tag.category)
