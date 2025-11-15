@@ -114,3 +114,8 @@ make-component name:
     echo 'class ThemePicker(Component):' >> "$py_file"
     echo '    template_file = "{{name}}.html"' >> "$py_file"
     echo '    js_file = "{{name}}.js"' >> "$py_file"
+
+load-demo:
+    @echo "Loading demo data..."
+    DJANGO_READ_DOT_ENV_FILE=True uv run python manage.py loaddata demo.json
+    cp -r tesys_tagboard/fixtures/uploads/ tesys_tagboard/media/
