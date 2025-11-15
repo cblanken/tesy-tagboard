@@ -1,5 +1,5 @@
 (function () { // Self invoking function to avoid variable clashing
-  let root = document.querySelector(".tag-search-container");
+  let root = document.querySelector(".search-container");
   let search_input = root.querySelector("input[type='search']")
   function get_search_results() {
     return root.querySelector(".result-container ul");

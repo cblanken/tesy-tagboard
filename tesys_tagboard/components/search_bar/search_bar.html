@@ -1,6 +1,6 @@
 {% load component_tags %}
 
-<div class="relative tag-search-container">
+<div class="relative z-50 search-container">
   <label class="input">
     <svg class="opacity-50 h-[1em]"
          xmlns="http://www.w3.org/2000/svg"
@@ -12,7 +12,7 @@
     </svg>
     <input type="search"
            placeholder="Search tags..."
-           hx-get='{% url "tag-autocomplete" %}?partial='
+           hx-get='{{ autocomplete_url }}?partial='
            hx-params="partial"
            hx-trigger="input changed delay:500ms, keyup[key=='Enter'], search"
            hx-target=".result-container"
