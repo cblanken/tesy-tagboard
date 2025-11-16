@@ -3,7 +3,7 @@ from django_components import register
 
 
 @register("create_tag")
-class ThemePicker(Component):
+class CreateTagComponent(Component):
     template_file = "create_tag.html"
     js_file = "create_tag.js"
 

@@ -3,6 +3,6 @@ from django_components import register
 
 
 @register("post_thumbnail")
-class ThemePicker(Component):
+class PostThumbnailComponent(Component):
     template_file = "post_thumbnail.html"
     js_file = "post_thumbnail.js"

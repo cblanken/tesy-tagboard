@@ -98,6 +98,8 @@ alias mkc := make-component
 make-component name:
     #!/usr/bin/env bash
     set -euxo pipefail
+    pascal=$(echo '{{name}}' | sed -r 's/(^|_)([a-z])/\U\2/g')
+    class_name="${pascal}Component"
     echo "Making '{{name}}' component"
     dir="./tesys_tagboard/components/{{name}}"
     mkdir "$dir"
@@ -111,7 +113,7 @@ make-component name:
     echo '' >> "$py_file"
     echo '' >> "$py_file"
     echo '@register("{{name}}")' >> "$py_file"
-    echo 'class ThemePicker(Component):' >> "$py_file"
+    echo "class ${class_name}(Component):" >> "$py_file"
     echo '    template_file = "{{name}}.html"' >> "$py_file"
     echo '    js_file = "{{name}}.js"' >> "$py_file"
 

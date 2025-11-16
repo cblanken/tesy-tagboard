@@ -4,7 +4,7 @@ from django_components import register
 
 
 @register("search_bar")
-class ThemePicker(Component):
+class SearchBarComponent(Component):
     template_file = "search_bar.html"
     js_file = "search_bar.js"
 
