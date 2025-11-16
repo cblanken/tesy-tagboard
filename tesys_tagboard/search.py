@@ -17,7 +17,9 @@ from .models import Tag
 
 
 def tag_autocomplete(
-    partial: str, exclude_tag_names: list[str] | None = None
+    partial: str,
+    exclude_tag_names: list[str] | None = None,
+    exlude_tags: QuerySet[Tag] | None = None,
 ) -> QuerySet[Tag]:
     tags = Tag.objects.filter(Q(name__icontains=partial))
     if exclude_tag_names is not None:
@@ -44,10 +46,10 @@ username_validator = validators.RegexValidator(
 
 
 class TokenCategory(Enum):
-    """Enum for categorizing token in Post search query
+    """Enum for categorizing tokens in Post search queries
     Note that these prefixes (besides the default `tag`)
     will be shadowed by any conflicting Tag prefixes since
-    Tag's take precendence when searching.
+    Tags take precendence when searching.
     """
 
     tag = TokenType([""], tag_name_validator)  # default tag (no prefix)
@@ -92,18 +94,25 @@ class AutocompleteItem:
     token_category: TokenCategory
     name: str
     tag_category: TagCategory | None = None
+    tag_id: int | None = None
     alias: str = ""
 
 
 class PostSearch:
-    """Class to model a Post search result including tag autocomplete"""
+    """Class to model a Post search query
+    Validates query and retrieves autocompletion and query results
+
+    Post search queries can be represented by a regular query string
+    """
 
     def __init__(self, query: str, tag_prefixes: list[str], max_tags: int = 20):
         self.query = query
-        tokens = re.split(r"\s+", self.query)
+        tokens = re.split(r"\s+;\s+", self.query)
         self.max_tags = max_tags
-        self.include_tag_names = []
-        self.exclude_tag_names = []
+        self.include_tag_names: list[str] = []
+        self.exclude_tag_names: list[str] = []
+        self.include_tags: QuerySet[Tag] | None = None
+        self.exclude_tags: QuerySet[Tag] | None = None
         for token in tokens:
             # Parse named tokens and simple tags
             if len(token) > 0:
@@ -116,29 +125,41 @@ class PostSearch:
                     )
                 elif len(rest) == 1:
                     # Token with a prefix
-                    ttype = TokenCategory.select(prefix)
+                    token_category = TokenCategory.select(prefix)
                     named_token = NamedToken(
-                        ttype, rest[0], prefix=prefix, negate=negate
+                        token_category, rest[0], prefix=prefix, negate=negate
                     )
                 else:
-                    msg = "Tokens may only contain a single colon ':'"
-                    raise ValueError(msg)
+                    token_category = TokenCategory.select(prefix)
+                    named_token = NamedToken(
+                        token_category, "".join(rest), prefix=prefix, negate=negate
+                    )
 
                 if named_token.category is TokenCategory.tag:
                     if negate:
                         self.exclude_tag_names.append(named_token.value)
+                        # TODO: also search TagAliases
+                        self.exclude_tags = Tag.objects.filter(
+                            name__in=self.exclude_tag_names,
+                            category=TagCategory.select(named_token.prefix),
+                        )
                     else:
                         self.include_tag_names.append(named_token.value)
+                        # TODO: also search TagAliases
+                        self.include_tags = Tag.objects.filter(
+                            name__in=self.include_tag_names,
+                            category=TagCategory.select(named_token.prefix),
+                        )
 
     def autocomplete(self, partial: str = "") -> Iterable[AutocompleteItem]:
         """Return autocomplete matches base on existing search query and
         the provided `partial`"""
         tags = tag_autocomplete(
             partial, self.exclude_tag_names + self.include_tag_names
-        )
+        )[: self.max_tags]
         return chain(
             (
-                AutocompleteItem(TokenCategory.tag, tag.name, tag.category)
+                AutocompleteItem(TokenCategory.tag, tag.name, tag.category, tag.pk)
                 for tag in tags
             ),
             (

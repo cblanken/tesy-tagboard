@@ -13,8 +13,12 @@
           class="flex gap-2 items-center">
       {% csrf_token %}
       {{ form }}
-      <div id="post-search-tags" class="flex">{% component "add_tagset" / %}</div>
-      <input type="submit" value="Search" class="text-xl btn btn-primary" />
+      <div id="post-search-tags" class="flex">
+        {% component "add_tagset" autocomplete_url="post-autocomplete" tags=tags / %}
+      </div>
+      <input type="submit"
+             value="Search"
+             class="self-start mt-4 text-xl btn btn-primary" />
     </form>
     <section class="flex flex-col gap-4 items-center">
       {% component "pager" with pager=pager page=page / %}

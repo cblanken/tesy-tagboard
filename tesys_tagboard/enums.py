@@ -36,6 +36,15 @@ class TagCategory(Enum):
     ARTIST = TagCategoryData("AR", {"art", "artist"}, "artist")
     COPYRIGHT = TagCategoryData("CO", {"copy", "copyright"}, "copyright")
 
+    @classmethod
+    def select(cls, name: str):
+        """Select TagCategory by name or one of its aliases"""
+        for names, category in [(x.value.prefixes, x) for x in TagCategory]:
+            if name in names:
+                return category
+
+        return cls.BASIC
+
 
 class MediaCategory(StrEnum):
     """MIME media content type"""

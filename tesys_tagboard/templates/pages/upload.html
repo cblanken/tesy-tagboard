@@ -14,7 +14,7 @@
       {% csrf_token %}
       {{ form }}
       <input type="submit" value="Post" class="text-xl btn btn-primary" />
-      <div id="all-posts-tagset" class="flex">{% component "add_tagset" / %}</div>
+      <div id="all-posts-tagset" class="flex">{% component "add_tagset" autocomplete_url="tag-autocomplete" / %}</div>
     </form>
   </div>
 {% endblock content %}

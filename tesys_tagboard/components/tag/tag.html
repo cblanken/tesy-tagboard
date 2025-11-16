@@ -3,6 +3,7 @@
        role="button"
        class="btn {% if category == "basic" %}text-tag bg-tag-basic {% elif category == "artist" %}text-tag bg-tag-artist {% elif category == "copyright" %}text-tag bg-tag-copyright {% else %}text-secondary-content bg-secondary{% endif %}">
     {{ tag.name }}
+    <input type="hidden" name="tagset" value="{{ tag.pk }}" />
   </div>
   {% if actions %}
     <ul tabindex="-1"

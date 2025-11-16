@@ -1,3 +1,4 @@
+from typing import TYPE_CHECKING
 from typing import Any
 
 from django.core.files.uploadedfile import UploadedFile
@@ -18,6 +19,9 @@ from .models import Post
 from .models import Tag
 from .search import PostSearch
 from .search import tag_autocomplete
+
+if TYPE_CHECKING:
+    from django.db.models import QuerySet
 
 
 class HtmxHttpRequest(HttpRequest):
@@ -48,6 +52,7 @@ def posts(request: HtmxHttpRequest) -> TemplateResponse:
     form = PostSearchForm(data) if request.method == "POST" else PostForm()
 
     posts = Post.objects.all()
+    tags: QuerySet[Tag] | None = None
     if form.is_valid():
         tagset = form.cleaned_data.get("tagset")
         tags = Tag.objects.filter(pk__in=tagset)
@@ -59,7 +64,7 @@ def posts(request: HtmxHttpRequest) -> TemplateResponse:
     pager = Paginator(posts, 12, 5)
     page_num = request.GET.get("page", 1)
     page = pager.get_page(page_num)
-    context = {"posts": posts, "pager": pager, "page": page}
+    context = {"posts": posts, "pager": pager, "page": page, "tags": tags}
     return TemplateResponse(request, "pages/posts.html", context)
 
 

@@ -1,9 +1,18 @@
-<ul class="flex flex-col gap-2 list-none bg-secondary text-secondary-content">
+<ul class="flex flex-col list-none bg-secondary text-secondary-content">
   {% for item in items %}
-    <li class="hover:brightness-125">
-      {% if item.alias %}<span>{{ alias }} &gt;</span>{% endif %}
-      {% if item.category %}item.category.name{% endif %}
-      {{ item.name }}
+    <li data-id="{{ item.tag_id }}"
+        data-name="{{ item.name }}"
+        class="flex hover:brightness-125 {% if item.tag_category == "BA" %}text-tag bg-tag-basic {% elif item.tag_category == "AR" %}text-tag bg-tag-artist {% elif item.tag_category == "CO" %}text-tag bg-tag-copyright {% else %}text-secondary-content bg-secondary{% endif %}">
+      <div class="px-2 w-12 text-center bg-accent text-accent-content">
+        {% if item.tag_category %}
+          tag
+        {% else %}
+          f(x)
+        {% endif %}
+      </div>
+      {% if item.alias %}<div class="px-2">{{ alias }} &gt;</div>{% endif %}
+      {% if item.category %}<div>item.category.name</div>{% endif %}
+      <div class="px-1">{{ item.name }}</div>
     </li>
   {% endfor %}
 </ul>
