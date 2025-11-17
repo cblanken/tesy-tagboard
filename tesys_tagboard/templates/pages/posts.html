@@ -22,11 +22,7 @@
       {% component "pager" with pager=pager page=page / %}
       <div class="flex flex-wrap gap-4 justify-center">
         {% for post in page %}
-          <a href="{% url "post" media_id=post.media.id %}">
-            <img class="object-cover rounded-md border-2 w-[400px] h-[400px]"
-                 src="{{ post.media.image.file.url }}"
-                 alt="image" />
-          </a>
+          {% component "post_thumbnail" post=post / %}
         {% endfor %}
       </div>
       {% component "pager" with pager=pager page=page / %}

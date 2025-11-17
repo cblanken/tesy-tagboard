@@ -1,22 +1,26 @@
-<form class="rounded-md cursor-pointer select-none">
+<form method="post"
+      enctype="multipart/form-data"
+      action='{% url "posts" %}'
+      class="rounded-md cursor-pointer select-none tag-form">
   <div class="hidden">{% csrf_token %}</div>
   <div class="dropdown">
-    <div tabindex="0"
-         role="button"
-         class="btn {% if category == "basic" %}text-tag bg-tag-basic {% elif category == "artist" %}text-tag bg-tag-artist {% elif category == "copyright" %}text-tag bg-tag-copyright {% else %}text-secondary-content bg-secondary{% endif %}">
+    <button tabindex="0"
+            role="button"
+            class="btn {% if category == "basic" %}text-tag bg-tag-basic {% elif category == "artist" %}text-tag bg-tag-artist {% elif category == "copyright" %}text-tag bg-tag-copyright {% else %}text-secondary-content bg-secondary{% endif %}">
       {{ tag.name }}
       <input id="tag-{{ tag.pk }}"
              type="hidden"
              name="tagset"
              value="{{ tag.pk }}" />
-    </div>
+    </button>
     {% if actions %}
       <ul tabindex="-1"
           class="top-full mt-1 rounded-lg first:rounded-t-lg last:rounded-b-lg tag-actions dropdown-content bg-base-300 text-base-content">
         {% for action in actions %}
           <li class="relative p-2 w-52 font-bold group menu z-1 hover:bg-accent hover:text-accent-content">
-            <button class="w-full h-full"
-                    {% if action.name == "search" %} type="submit" formmethod="post" formaction="{% url "posts" %}" formenctype="multipart/form-data" {% elif action.name == "favorite" %} {% elif action.name == "blocklist" %} {% else %} {% endif %}>
+            <button data-action="{{ action.name }}"
+                    class="w-full h-full"
+                    {% if action.name == "search" %}{% elif action.name == "favorite" %} {% elif action.name == "blocklist" %} {% else %} {% endif %}>
               {{ action.name }}
             </button>
             <aside class="hidden absolute top-0 left-full p-1 min-h-full text-sm rounded-none group-hover:block min-w-40 h-content bg-info text-info-content">

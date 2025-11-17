@@ -1,0 +1,19 @@
+{% load component_tags %}
+
+<a class="relative group/post"
+   href="{% url "post" media_id=post.media.id %}">
+  <img class="object-cover rounded-md border-2 w-[400px] h-[400px]"
+       src="{{ post.media.image.file.url }}"
+       alt="image" />
+  <div class="flex hidden absolute top-0 flex-col justify-between p-2 w-full h-full group-hover/post:flex">
+    <section class="flex gap-1 self-end">
+      <button class="btn btn-secondary">Favorite</button>
+      <button class="btn btn-secondary">Add to collection</button>
+    </section>
+    <section class="flex flex-wrap gap-1 text-sm">
+      {% for tag in tags %}
+        {% component "tag" tag=tag / %}
+      {% endfor %}
+    </section>
+  </div>
+</a>

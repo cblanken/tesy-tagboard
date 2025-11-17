@@ -5,15 +5,12 @@
     {% include "nav/pager_button.html" with text="Previous" disabled=True %}
   {% endif %}
   {% for page_num in pager.page_range %}
-    <a href="?page={{ page_num }}">
-      <button class="join-item btn {% if page_num == page.number %}btn-active{% endif %}">{{ page_num }}</button>
-    </a>
+    {% if page_num == page.number %}
+      {% include "nav/pager_button.html" with text=page_num page_num=page_num active=True %}
+    {% else %}
+      {% include "nav/pager_button.html" with text=page_num page_num=page_num active=False %}
+    {% endif %}
   {% endfor %}
-  {% if pager.has_next %}
-    <a href="?page={{ page.next_page_number }}">
-      <button class="next join-item btn">next</button>
-    </a>
-  {% endif %}
   {% if page.has_next %}
     {% include "nav/pager_button.html" with text="Next" page_num=page.next_page_number %}
   {% else %}
