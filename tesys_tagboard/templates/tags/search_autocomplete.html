@@ -1,0 +1,9 @@
+<ul class="flex flex-col gap-0 py-2 list-none">
+  {% for tag in tags %}
+    <li data-id="{{ tag.pk }}"
+        data-name="{{ tag.name }}"
+        class="py-1 px-2 bg-blue-400 cursor-pointer bg-secondary text-secondary-content hover:brightness-125">
+      {{ tag.get_category_display }}:{{ tag.name }}
+    </li>
+  {% endfor %}
+</ul>
