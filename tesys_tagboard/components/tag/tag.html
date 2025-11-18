@@ -8,8 +8,7 @@
             role="button"
             class="{% if size == "small" %}btn-sm{% elif size == "large" %}btn-lg{% endif %} px-3 py-1 btn {% if category == "basic" %}text-tag bg-tag-basic {% elif category == "artist" %}text-tag bg-tag-artist {% elif category == "copyright" %}text-tag bg-tag-copyright {% else %}text-secondary-content bg-secondary{% endif %}">
       <div class="flex gap-1 items-center">
-        <i data-feather="tag"
-           class="feather {% if size == "small" %}feather-sm{% elif size == "large" %}feather-lg{% endif %}"></i>
+        {% include "icons/feather.html" with icon="tag" %}
         <div>{{ tag.name }}</div>
       </div>
       <div>({{ tag.post_count }})</div>

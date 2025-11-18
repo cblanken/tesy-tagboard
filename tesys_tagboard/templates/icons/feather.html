@@ -1,0 +1,6 @@
+{% load static custom_filters %}
+
+{% get_static_prefix as STATIC_PREFIX %}
+<svg class="feather">
+  <use href="{{ STATIC_PREFIX }}/icons/feather-sprite.svg#{{ icon }}" />
+</svg>

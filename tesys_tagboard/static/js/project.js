@@ -5,5 +5,3 @@ document.querySelectorAll("button.btn").forEach(btn => {
     e.stopPropagation();
   });
 });
-
-feather.replace();

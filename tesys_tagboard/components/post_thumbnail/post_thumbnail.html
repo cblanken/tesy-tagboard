@@ -10,11 +10,11 @@
     <section class="flex gap-1 self-end">
       <button class="flex align-center btn btn-secondary">
         <div>Favorite</div>
-        <i data-feather="heart" class="feather feather-sm"></i>
+        {% include "icons/feather.html" with icon="heart" %}
       </button>
       <button class="btn btn-secondary">
         <div>Add to collection</div>
-        <i data-feather="list" class="feather feather-sm"></i>
+        {% include "icons/feather.html" with icon="list" %}
       </button>
     </section>
     <section class="flex flex-wrap gap-1 text-sm">
