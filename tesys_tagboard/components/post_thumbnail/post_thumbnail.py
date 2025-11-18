@@ -7,6 +7,7 @@ from tesys_tagboard.models import Tag
 @register("post_thumbnail")
 class PostThumbnailComponent(Component):
     template_file = "post_thumbnail.html"
+    css_file = "post_thumbnail.css"
     js_file = "post_thumbnail.js"
 
     def get_template_data(self, args, kwargs, slots, context):

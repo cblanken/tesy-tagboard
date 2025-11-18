@@ -1,0 +1,3 @@
+.post-thumbnail-hover {
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), transparent 60%), linear-gradient(to top, rgba(0,0,0,0.5), transparent 60%);
+}

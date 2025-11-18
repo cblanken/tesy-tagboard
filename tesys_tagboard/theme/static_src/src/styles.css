@@ -98,12 +98,13 @@
 
   @keyframes pop_in {
     0% {
-      transform: scale(0.4);
+      transform: scale(0.7);
       opacity: 0;
     }
 
     75% {
-      transform: scale(1.02);
+      transform: scale(1.01);
+      opacity: 0.4;
     }
 
     100% {

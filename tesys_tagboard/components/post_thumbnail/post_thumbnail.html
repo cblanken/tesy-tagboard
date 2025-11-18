@@ -1,11 +1,12 @@
 {% load component_tags %}
 
-<a class="relative group/post"
+<a class="relative skeleton post-thumbnail group/post w-[400px] h-[400px]"
    href="{% url "post" media_id=post.media.id %}">
-  <img class="object-cover rounded-md border-2 w-[400px] h-[400px]"
+  <img class="object-cover invisible w-full h-full rounded-md"
+       loading="lazy"
        src="{{ post.media.image.file.url }}"
        alt="image" />
-  <div class="flex hidden absolute top-0 flex-col justify-between p-2 w-full h-full group-hover/post:flex">
+  <div class="flex hidden absolute top-0 flex-col justify-between p-2 w-full h-full post-thumbnail-hover group-hover/post:flex">
     <section class="flex gap-1 self-end">
       <button class="btn btn-secondary">Favorite</button>
       <button class="btn btn-secondary">Add to collection</button>
