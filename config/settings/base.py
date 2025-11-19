@@ -213,6 +213,15 @@ TEMPLATES = [
     },
 ]
 
+
+# COMPONENTS
+# ------------------------------------------------------------------------------
+COMPONENTS = {
+    "dirs": [],
+    "app_dirs": ["components"],
+    "reload_on_template_change": True,
+}
+
 CRISPY_TEMPLATE_PACK = "tailwind"
 CRISPY_ALLOWED_TEMPLATE_PACKS = "tailwind"
 

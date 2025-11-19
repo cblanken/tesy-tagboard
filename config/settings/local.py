@@ -71,10 +71,23 @@ if env("USE_DOCKER") == "yes":
 # https://django-extensions.readthedocs.io/en/latest/installation_instructions.html#configuration
 INSTALLED_APPS += ["django_extensions"]
 
+
+# django-browser-reload
+# ------------------------------------------------------------------------------
+# https://github.com/adamchainz/django-browser-reload
+MIDDLEWARE += ["django_browser_reload.middleware.BrowserReloadMiddleware"]
+INSTALLED_APPS += ["django_browser_reload"]
+# Reload on any file change (including components)
+reload_on_file_change = True
+
+# django-watchfiles
+# ------------------------------------------------------------------------------
+# https://github.com/adamchainz/django-watchfiles
+INSTALLED_APPS += ["django_watchfiles"]
+
+
 # Tesy's Tagboard dev apps
 INSTALLED_APPS += [
-    "django_watchfiles",
-    "django_browser_reload",
     "tailwind",
     "theme",
 ]

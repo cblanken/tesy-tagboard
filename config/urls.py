@@ -41,7 +41,7 @@ urlpatterns += [path("api/", api.urls)]
 if settings.DEBUG:
     # This allows the error pages to be debugged during development, just visit
     # these url in browser to see how these error pages look like.
-    urlpatterns += [
+    urlpatterns = [
         path(
             "400/",
             default_views.bad_request,
@@ -59,6 +59,7 @@ if settings.DEBUG:
         ),
         path("500/", default_views.server_error),
         path("__reload__/", include("django_browser_reload.urls")),
+        *urlpatterns,
     ]
     if "debug_toolbar" in settings.INSTALLED_APPS:
         import debug_toolbar
