@@ -8,7 +8,7 @@
            placeholder="Search tags..."
            hx-get='{{ autocomplete_url }}?partial='
            hx-params="partial"
-           hx-trigger="input changed delay:500ms, keyup[key=='Enter'], search"
+           hx-trigger="input changed delay:500ms, keyup[key=='Enter']"
            hx-target=".result-container"
            hx-on::config-request="event.detail.path += this.value" />
   </label>

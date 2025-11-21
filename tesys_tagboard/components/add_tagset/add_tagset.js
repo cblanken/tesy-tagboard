@@ -32,9 +32,22 @@
       Array.from(search_results.children).forEach(autocomplete_item => {
         htmx.on(autocomplete_item, "mousedown", add_tag_to_set_handler);
         htmx.on(autocomplete_item, "keydown", (e) => {
-          if (e.code == "Enter") {
-              e.preventDefault();
+          switch (e.code) {
+            case "Enter":
+              // e.preventDefault();
               add_tag_to_set_handler(e);
+              break;
+            case "Escape":
+              e.preventDefault();
+              search_input.focus();
+            case "ArrowLeft":
+              e.preventDefault();
+              search_input.focus();
+            case "ArrowRight":
+              e.preventDefault();
+              search_input.focus();
+            default:
+              // Do nothing
           }
         });
       });
