@@ -186,7 +186,7 @@ dependencies = [
   "argon2-cffi==25.1.0",
   "crispy-bootstrap5==2025.6",
   "crispy-tailwind>=1.0.3",
-  "django>=6.0.2",
+  "django>=6.0.5",
   "django-allauth[mfa,socialaccount]==65.14.3",
   "django-anymail[mailgun,mailtrap]==14.0",
   "django-browser-reload>=1.21.0",
