@@ -10,9 +10,13 @@ services:
     build:
       context: .
       dockerfile: ./compose/production/django/Dockerfile
-
     image: tesys_tagboard_production_django
     container_name: tesys_tagboard_production_django
+    logging:
+      driver: "local"
+      options:
+        max-size: "10m"
+        max-file: 5
     volumes:
       - production_django_media:/app/tesys_tagboard/media
       - production_django_static:/app/staticfiles
@@ -34,6 +38,11 @@ services:
       dockerfile: ./compose/production/postgres/Dockerfile
     image: tesys_tagboard_production_postgres
     container_name: tesys_tagboard_production_postgres
+    logging:
+      driver: "local"
+      options:
+        max-size: "10m"
+        max-file: 5
     volumes:
       - production_postgres_data:/var/lib/postgresql/data
       - production_postgres_data_backups:/backups
@@ -45,7 +54,11 @@ services:
 
   redis:
     image: docker.io/redis:8.6
-
+    logging:
+      driver: "local"
+      options:
+        max-size: "10m"
+        max-file: 3
 
   nginx:
     build:
@@ -54,6 +67,11 @@ services:
     image: tesys_tagboard_production_nginx
     depends_on:
       - django
+    logging:
+      driver: "local"
+      options:
+        max-size: "10m"
+        max-file: 5
     volumes:
       - production_django_media:/usr/share/nginx/media:ro
       - production_django_static:/usr/share/nginx/static:ro
