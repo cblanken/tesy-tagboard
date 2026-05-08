@@ -1,8 +1,4 @@
-# define an alias for the specific python version used in this file.
-FROM ghcr.io/astral-sh/uv:python3.14-bookworm-slim AS python
-
-# Python build stage
-FROM python AS python-build-stage
+FROM ghcr.io/astral-sh/uv:python3.14-bookworm-slim AS python-build-stage
 
 ARG APP_HOME=/app
 ARG TAILWIND_HOME=${APP_HOME}/tesys_tagboard/theme/static_src

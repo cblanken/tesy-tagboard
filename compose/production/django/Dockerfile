@@ -1,10 +1,18 @@
-# define an alias for the specific python version used in this file.
-FROM ghcr.io/astral-sh/uv:python3.14-bookworm-slim AS python-build-stage
+ARG PYTHON_VERSION="3.14"
+ARG NODE_VERSION="24"
+ARG APP_HOME="/app"
+ARG TAILWIND_THEME_HOME="/app/tesys_tagboard/theme"
+ARG TAILWIND_THEME_SRC="/app/tesys_tagboard/theme/static_src"
+ARG TAILWIND_THEME_DIST="/app/tesys_tagboard/theme/static"
+
+
+#===================
+# Python build stage
+#===================
+FROM ghcr.io/astral-sh/uv:python${PYTHON_VERSION}-bookworm-slim AS python-build-stage
 
 ENV UV_COMPILE_BYTECODE=1 UV_LINK_MODE=copy UV_PYTHON_DOWNLOADS=0
-
-ARG APP_HOME=/app
-ARG TAILWIND_HOME=${APP_HOME}/tesys_tagboard/theme/static_src
+ARG APP_HOME
 
 WORKDIR ${APP_HOME}
 
@@ -18,11 +26,6 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
   libmagic1 \
   curl
 
-# Install Tailwind dependencies
-RUN curl -sl https://deb.nodesource.com/setup_24.x | bash - \
-  && apt-get install -y nodejs --no-install-recommends
-
-
 # Requirements are installed here to ensure they will be cached.
 RUN --mount=type=cache,target=/root/.cache/uv \
     --mount=type=bind,source=uv.lock,target=uv.lock \
@@ -35,16 +38,23 @@ RUN --mount=type=cache,target=/root/.cache/uv \
     --mount=type=bind,source=pyproject.toml,target=pyproject.toml \
     uv sync --locked --no-dev
 
-# Build Tailwind styles
-WORKDIR ${TAILWIND_HOME}
-RUN npm install
-RUN npm run build
-RUN rm -rf ./node_modules
 
+#============================
+# Tailwind styles build stage
+#============================
+FROM docker.io/library/node:${NODE_VERSION}-alpine AS tailwind-build-stage
+ARG APP_HOME
+ARG TAILWIND_THEME_SRC
+
+COPY . ${APP_HOME}
+WORKDIR ${TAILWIND_THEME_SRC}
+RUN npm install && npm run build
+
+#===================
 # Python 'run' stage
-FROM python:3.14-slim-bookworm AS python-run-stage
-
-ARG APP_HOME=/app
+#===================
+FROM python:${PYTHON_VERSION}-slim-bookworm AS python-run-stage
+ARG APP_HOME
 
 WORKDIR ${APP_HOME}
 
@@ -76,7 +86,9 @@ RUN sed -i 's/\r$//g' /start
 RUN chmod +x /start
 
 # Copy the application from the builder
+ARG TAILWIND_THEME_DIST
 COPY --from=python-build-stage --chown=django:django ${APP_HOME} ${APP_HOME}
+COPY --from=tailwind-build-stage --chown=django:django ${TAILWIND_THEME_DIST} ${TAILWIND_THEME_DIST}
 
 # Place executables in the environment at the front of the path
 ENV PATH="/app/.venv/bin:$PATH"
