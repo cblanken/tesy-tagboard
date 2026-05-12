@@ -17,6 +17,7 @@ from django.utils.translation import gettext_lazy as _
 from more_itertools import take
 
 from .enums import RatingLevel
+from .enums import SearchBoolean
 from .enums import SupportedMediaType
 from .enums import TokenArgRelation
 from .models import Post
@@ -1224,7 +1225,7 @@ class PostSearch:
                 case PostSearchTokenCategory.COLLECTION:
                     match token.arg_relation:
                         case TokenArgRelation.EQUAL:
-                            if token.arg.lower() == "no":
+                            if token.arg.casefold() == SearchBoolean.NO.value:
                                 token_expr = Q(collection=None)
                             else:
                                 token_expr = ~Q(collection=None)
@@ -1248,7 +1249,7 @@ class PostSearch:
                 case PostSearchTokenCategory.PARENT:
                     match token.arg_relation:
                         case TokenArgRelation.EQUAL:
-                            if token.arg.lower() == "no":
+                            if token.arg.casefold() == SearchBoolean.NO.value:
                                 token_expr = Q(parent=None)
                             else:
                                 token_expr = ~Q(parent=None)
@@ -1267,7 +1268,7 @@ class PostSearch:
                 case PostSearchTokenCategory.CHILD:
                     match token.arg_relation:
                         case TokenArgRelation.EQUAL:
-                            if token.arg.lower() == "no":
+                            if token.arg.casefold() == SearchBoolean.NO.value:
                                 token_expr = Q(child_post_ids=None)
                             else:
                                 token_expr = ~Q(child_post_ids=None)

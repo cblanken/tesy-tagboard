@@ -7,6 +7,13 @@ from django.db.models import IntegerChoices
 from django.utils.translation import gettext_lazy as _
 
 
+class SearchBoolean(Enum):
+    # Translators: search parameter confirmation
+    YES = _("yes")
+    # Translators: search parameter negation
+    NO = _("no")
+
+
 class RatingLevel(IntegerChoices):
     """Rating levels for posts
     Default: UNRATED

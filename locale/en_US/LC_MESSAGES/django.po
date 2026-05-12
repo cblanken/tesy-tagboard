@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-23 20:18+0000\n"
+"POT-Creation-Date: 2026-05-12 19:06+0000\n"
 "Language: en-US\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -29,12 +29,53 @@ msgstr ""
 msgid "Spanish"
 msgstr ""
 
+#. Translators: remove tag action
+#: tesys_tagboard/components/add_tagset/add_tagset.py:30
+#: tesys_tagboard/templates/account/email.html:52
+#: tesys_tagboard/templates/mfa/webauthn/authenticator_confirm_delete.html:18
+#: tesys_tagboard/templates/mfa/webauthn/authenticator_list.html:62
+#: tesys_tagboard/templates/socialaccount/connections.html:42
+msgid "Remove"
+msgstr ""
+
+#. Translators: remove tag action description
+#: tesys_tagboard/components/add_tagset/add_tagset.py:32
+msgid "Remove this tag from the tag set"
+msgstr ""
+
+#: tesys_tagboard/components/collection_picker/collection_picker.html:15
 #: tesys_tagboard/components/create_collection/create_collection.html:4
+#: tesys_tagboard/templates/users/user_detail.html:118
 msgid "Create a collection"
 msgstr ""
 
+#. Translators: label for "Delete Tag" submit button
+#. Translators: label for "Delete Tag Alias" submit button
+#. Translators: label for "Delete Tag" submit button
+#. Translators: label for "Delete Collection" submit button
+#: tesys_tagboard/components/collection_thumbnail/collection_thumbnail.html:26
+#: tesys_tagboard/templates/pages/collection.html:22
+#: tesys_tagboard/templates/tags/tags_by_category.html:33
+#: tesys_tagboard/views.py:517 tesys_tagboard/views.py:675
+#: tesys_tagboard/views.py:845 tesys_tagboard/views.py:1058
+msgid "Delete"
+msgstr ""
+
+#: tesys_tagboard/components/collection_thumbnail/collection_thumbnail.html:30
+#: tesys_tagboard/templates/mfa/webauthn/authenticator_list.html:58
+#: tesys_tagboard/templates/pages/collection.html:18
+#: tesys_tagboard/templates/tags/tags_by_category.html:24
+msgid "Edit"
+msgstr ""
+
+#. Translators: label for "Create Tag" submit button
+#. Translators: label for "Create Tag Alias" submit button
+#. Translators: label for "Create Tag Category" submit button
+#. Translators: label for "Create Collection" submit button
 #: tesys_tagboard/components/create_collection/create_collection.html:31
 #: tesys_tagboard/templates/mfa/webauthn/signup_form.html:23
+#: tesys_tagboard/views.py:404 tesys_tagboard/views.py:564
+#: tesys_tagboard/views.py:724 tesys_tagboard/views.py:932
 msgid "Create"
 msgstr ""
 
@@ -63,7 +104,9 @@ msgstr ""
 msgid "Pick a rating level"
 msgstr ""
 
+#. Translators: title  for "Create Tag" modal form
 #: tesys_tagboard/components/create_tag/create_tag.html:35
+#: tesys_tagboard/templates/pages/tags.html:24 tesys_tagboard/views.py:402
 msgid "Create Tag"
 msgstr ""
 
@@ -72,468 +115,563 @@ msgid "Create a tag alias"
 msgstr ""
 
 #: tesys_tagboard/components/create_tag_alias/create_tag_alias.html:27
+#: tesys_tagboard/templates/forms/create_tag_alias.html:26
 msgid "Create Alias"
+msgstr ""
+
+#: tesys_tagboard/components/post_gallery/post_gallery.html:5
+msgid "No posts yet!"
 msgstr ""
 
 #: tesys_tagboard/components/post_thumbnail/post_thumbnail.html:38
 msgid "This post doesn't have any tags assigned yet!"
 msgstr ""
 
-#: tesys_tagboard/forms.py:68 tesys_tagboard/forms.py:106
+#: tesys_tagboard/components/tag/tag.py:55
+msgid "Search"
+msgstr ""
+
+#: tesys_tagboard/components/tag/tag.py:56
+msgid "Search for posts with this tag"
+msgstr ""
+
+#: tesys_tagboard/components/tag/tag.py:63
+msgid "Update tag"
+msgstr ""
+
+#: tesys_tagboard/components/tag/tag.py:64
+msgid "Update this tag"
+msgstr ""
+
+#: tesys_tagboard/components/tag/tag.py:70
+msgid "Delete tag"
+msgstr ""
+
+#: tesys_tagboard/components/tag/tag.py:71
+msgid "Delete this tag from all posts"
+msgstr ""
+
+#: tesys_tagboard/components/tag/tag.py:86
+msgid "Update alias"
+msgstr ""
+
+#: tesys_tagboard/components/tag/tag.py:87
+msgid "Update this tag alias"
+msgstr ""
+
+#: tesys_tagboard/components/tag/tag.py:93
+msgid "Delete alias"
+msgstr ""
+
+#: tesys_tagboard/components/tag/tag.py:94
+msgid "Delete this tag alias"
+msgstr ""
+
+#. Translators: search parameter confirmation
+#: tesys_tagboard/enums.py:12
+msgid "yes"
+msgstr ""
+
+#. Translators: search parameter negation
+#: tesys_tagboard/enums.py:14
+msgid "no"
+msgstr ""
+
+#: tesys_tagboard/enums.py:25
+msgid "Safe"
+msgstr ""
+
+#: tesys_tagboard/enums.py:26
+msgid "Unrated"
+msgstr ""
+
+#: tesys_tagboard/enums.py:27
+msgid "Questionable"
+msgstr ""
+
+#: tesys_tagboard/enums.py:28
+msgid "Explicit"
+msgstr ""
+
+#: tesys_tagboard/forms.py:80 tesys_tagboard/forms.py:118
 msgid "Source"
 msgstr ""
 
-#: tesys_tagboard/forms.py:72
+#: tesys_tagboard/forms.py:84
 msgid "File"
 msgstr ""
 
-#: tesys_tagboard/forms.py:104
+#: tesys_tagboard/forms.py:116
 msgid "Title"
 msgstr ""
 
-#: tesys_tagboard/models.py:85
+#: tesys_tagboard/models.py:88
 msgid "A parent tag category. Used for organizing tag categories into groups"
 msgstr ""
 
-#: tesys_tagboard/models.py:91
-msgid "Background color for tags in this category"
-msgstr ""
-
 #: tesys_tagboard/models.py:94
-msgid "Text color for tags in this category"
+msgid "Background color for tags in this category in light mode"
 msgstr ""
 
-#: tesys_tagboard/models.py:98
+#: tesys_tagboard/models.py:95
+msgid "light mode background"
+msgstr ""
+
+#: tesys_tagboard/models.py:100
+msgid "Text color for tags in this category in light mode"
+msgstr ""
+
+#: tesys_tagboard/models.py:101
+msgid "light mode text"
+msgstr ""
+
+#: tesys_tagboard/models.py:106
+msgid "Background color for tags in this category in dark mode"
+msgstr ""
+
+#: tesys_tagboard/models.py:107 tesys_tagboard/models.py:113
+msgid "dark mode text"
+msgstr ""
+
+#: tesys_tagboard/models.py:112
+msgid "Text color for tags in this category in dark mode"
+msgstr ""
+
+#: tesys_tagboard/models.py:117
 msgid "tag category"
 msgstr ""
 
-#: tesys_tagboard/models.py:99
+#: tesys_tagboard/models.py:118 tesys_tagboard/templates/pages/tags.html:15
 msgid "tag categories"
 msgstr ""
 
-#: tesys_tagboard/models.py:168
-msgid "tag"
-msgstr ""
-
-#: tesys_tagboard/models.py:169
-msgid "tags"
-msgstr ""
-
-#: tesys_tagboard/models.py:196
-msgid "tag alias"
-msgstr ""
-
-#: tesys_tagboard/models.py:197
-msgid "tag aliases"
-msgstr ""
-
-#: tesys_tagboard/models.py:215
-msgid "default post tag"
-msgstr ""
-
-#: tesys_tagboard/models.py:216
-msgid "default post tags"
-msgstr ""
-
-#: tesys_tagboard/models.py:230
+#: tesys_tagboard/models.py:195
 msgid "artist"
 msgstr ""
 
-#: tesys_tagboard/models.py:231
+#: tesys_tagboard/models.py:196
 msgid "artists"
 msgstr ""
 
-#: tesys_tagboard/models.py:422
+#: tesys_tagboard/models.py:429
 msgid "post"
 msgstr ""
 
-#: tesys_tagboard/models.py:423
+#: tesys_tagboard/models.py:430
 msgid "posts"
 msgstr ""
 
-#: tesys_tagboard/models.py:521
-msgid "image"
+#: tesys_tagboard/models.py:507
+msgid "tag"
 msgstr ""
 
-#: tesys_tagboard/models.py:522
-msgid "images"
+#: tesys_tagboard/models.py:508 tesys_tagboard/templates/pages/tags.html:13
+msgid "tags"
 msgstr ""
 
-#: tesys_tagboard/models.py:581
-msgid "video"
+#: tesys_tagboard/models.py:563
+msgid "tag alias"
+msgstr ""
+
+#: tesys_tagboard/models.py:564 tesys_tagboard/templates/pages/tags.html:17
+msgid "tag aliases"
 msgstr ""
 
 #: tesys_tagboard/models.py:582
+msgid "default post tag"
+msgstr ""
+
+#: tesys_tagboard/models.py:583
+msgid "default post tags"
+msgstr ""
+
+#: tesys_tagboard/models.py:638
+msgid "image"
+msgstr ""
+
+#: tesys_tagboard/models.py:639
+msgid "images"
+msgstr ""
+
+#: tesys_tagboard/models.py:699
+msgid "video"
+msgstr ""
+
+#: tesys_tagboard/models.py:700
 msgid "videos"
 msgstr ""
 
-#: tesys_tagboard/models.py:612
+#: tesys_tagboard/models.py:731
 msgid "audio"
 msgstr ""
 
-#: tesys_tagboard/models.py:613
+#: tesys_tagboard/models.py:732
 msgid "audios"
 msgstr ""
 
-#: tesys_tagboard/models.py:647
+#: tesys_tagboard/models.py:766
 msgid "source history"
 msgstr ""
 
-#: tesys_tagboard/models.py:648
+#: tesys_tagboard/models.py:767
 msgid "source histories"
 msgstr ""
 
-#: tesys_tagboard/models.py:669
+#: tesys_tagboard/models.py:788
 msgid "post tag history"
 msgstr ""
 
-#: tesys_tagboard/models.py:670
+#: tesys_tagboard/models.py:789
 msgid "post tag histories"
 msgstr ""
 
 #. Translators: Name of the "collection" search token
-#: tesys_tagboard/models.py:703 tesys_tagboard/search.py:468
+#: tesys_tagboard/models.py:824 tesys_tagboard/search.py:462
 msgid "collection"
 msgstr ""
 
-#: tesys_tagboard/models.py:704
+#: tesys_tagboard/models.py:825
 msgid "collections"
 msgstr ""
 
 #. Translators: Alias for the "comment_by" search token
-#: tesys_tagboard/models.py:752 tesys_tagboard/search.py:315
+#: tesys_tagboard/models.py:873 tesys_tagboard/search.py:309
 msgid "comment"
 msgstr ""
 
-#: tesys_tagboard/models.py:753
+#: tesys_tagboard/models.py:874
 msgid "comments"
 msgstr ""
 
-#: tesys_tagboard/models.py:778
+#: tesys_tagboard/models.py:910
 msgid "favorite"
 msgstr ""
 
-#: tesys_tagboard/models.py:779
+#: tesys_tagboard/models.py:911
 msgid "favorites"
 msgstr ""
 
+#: tesys_tagboard/search.py:122
+msgid "Search arguments may not contain an odd number of quotes."
+msgstr ""
+
 #. Translators: Description for the "wildcard" search token
-#: tesys_tagboard/search.py:263
+#: tesys_tagboard/search.py:257
 msgid ""
 "The default (un-named) token. When a plain string without any operator is "
 "given it will be interpreted as a tag name."
 msgstr ""
 
-#: tesys_tagboard/search.py:270
+#: tesys_tagboard/search.py:264
 msgid "tag_id"
 msgstr ""
 
 #. Translators: Description for the "tag_id" search token
-#: tesys_tagboard/search.py:272
+#: tesys_tagboard/search.py:266
 msgid "The ID of a tag."
 msgstr ""
 
 #. Translators: Name of the "id" search token
-#: tesys_tagboard/search.py:278
+#: tesys_tagboard/search.py:272
 msgid "id"
 msgstr ""
 
 #. Translators: Description for the "id" search token
-#: tesys_tagboard/search.py:280
+#: tesys_tagboard/search.py:274
 msgid "The ID of a post."
 msgstr ""
 
 #. Translators: Name of the "alias" search token
-#: tesys_tagboard/search.py:286
+#: tesys_tagboard/search.py:280
 msgid "alias"
 msgstr ""
 
 #. Translators: Description for the "alias" search token
-#: tesys_tagboard/search.py:288
+#: tesys_tagboard/search.py:282
 msgid "The name of a tag alias."
 msgstr ""
 
 #. Translators: Alias for the "alias" search token
-#: tesys_tagboard/search.py:291
+#: tesys_tagboard/search.py:285
 msgid "tag_alias"
 msgstr ""
 
 #. Translators: Name of the "tag_count" search token
-#: tesys_tagboard/search.py:298
+#: tesys_tagboard/search.py:292
 msgid "tag_count"
 msgstr ""
 
 #. Translators: Description for the "tag_count" search token
-#: tesys_tagboard/search.py:300
+#: tesys_tagboard/search.py:294
 msgid "The number of tags on a post."
 msgstr ""
 
 #. Translators: Alias for the "tag_count" search token
-#: tesys_tagboard/search.py:303
+#: tesys_tagboard/search.py:297
 msgid "tc"
 msgstr ""
 
 #. Translators: Name of the "comment_by" search token
-#: tesys_tagboard/search.py:310
+#: tesys_tagboard/search.py:304
 msgid "comment_by"
 msgstr ""
 
 #. Translators: Description for the "comment_by" search token
-#: tesys_tagboard/search.py:312
+#: tesys_tagboard/search.py:306
 msgid "The username of a user that has commented on a post"
 msgstr ""
 
 #. Translators: Alias for the "comment_by" search token
-#: tesys_tagboard/search.py:317
+#: tesys_tagboard/search.py:311
 msgid "cb"
 msgstr ""
 
 #. Translators: Name of the "comment_count" search token
-#: tesys_tagboard/search.py:324
+#: tesys_tagboard/search.py:318
 msgid "comment_count"
 msgstr ""
 
 #. Translators: Description for the "comment_count" search token
-#: tesys_tagboard/search.py:326
+#: tesys_tagboard/search.py:320
 msgid "The number of comments on a post."
 msgstr ""
 
 #. Translators: Alias for the "comment_count" search token
-#: tesys_tagboard/search.py:329
+#: tesys_tagboard/search.py:323
 msgid "cc"
 msgstr ""
 
 #. Translators: Name of the "fav_count" search token
-#: tesys_tagboard/search.py:336
+#: tesys_tagboard/search.py:330
 msgid "favorite_count"
 msgstr ""
 
 #. Translators: Description for the "fav_count" search token
-#: tesys_tagboard/search.py:338
+#: tesys_tagboard/search.py:332
 msgid "The number of favorites recieved by a post."
 msgstr ""
 
 #. Translators: Alias for the "fav_count" search token
-#: tesys_tagboard/search.py:341
+#: tesys_tagboard/search.py:335
 msgid "fav_count"
 msgstr ""
 
 #. Translators: Alias for the "fav_count" search token
-#: tesys_tagboard/search.py:343
+#: tesys_tagboard/search.py:337
 msgid "fc"
 msgstr ""
 
 #. Translators: Name of the "height" search token
-#: tesys_tagboard/search.py:350
+#: tesys_tagboard/search.py:344
 msgid "height"
 msgstr ""
 
 #. Translators: Description for the "height" search token
-#: tesys_tagboard/search.py:352
+#: tesys_tagboard/search.py:346
 msgid "The height of a Post (only applies to images and videos)."
 msgstr ""
 
 #. Translators: Alias for the "height" search token
-#: tesys_tagboard/search.py:355
+#: tesys_tagboard/search.py:349
 msgid "h"
 msgstr ""
 
 #. Translators: Name of the "width" search token
-#: tesys_tagboard/search.py:362
+#: tesys_tagboard/search.py:356
 msgid "width"
 msgstr ""
 
 #. Translators: Description for the "width" search token
-#: tesys_tagboard/search.py:364
-msgid "The width of a Post (only applies to images and videos."
+#: tesys_tagboard/search.py:358
+msgid "The width of a Post (only applies to images and videos)."
 msgstr ""
 
 #. Translators: Alias for the "width" search token
-#: tesys_tagboard/search.py:367
+#: tesys_tagboard/search.py:361
 msgid "w"
 msgstr ""
 
 #. Translators: Name of the "rating_label" search token
-#: tesys_tagboard/search.py:374
+#: tesys_tagboard/search.py:368
 msgid "rating_label"
 msgstr ""
 
-#: tesys_tagboard/search.py:377
+#: tesys_tagboard/search.py:371
 msgid ""
 "The rating of a Post. Accepts one of safe, unrated, questionable, and "
 "explicit."
 msgstr ""
 
 #. Translators: Alias for the "rating_label" search token
-#: tesys_tagboard/search.py:382
+#: tesys_tagboard/search.py:376
 msgid "rate"
 msgstr ""
 
 #. Translators: Alias for the "rating_label" search token
-#: tesys_tagboard/search.py:384
+#: tesys_tagboard/search.py:378
 msgid "r"
 msgstr ""
 
-#: tesys_tagboard/search.py:390
+#: tesys_tagboard/search.py:384
 msgid "rating_num"
 msgstr ""
 
-#: tesys_tagboard/search.py:391
+#: tesys_tagboard/search.py:385
 msgid "The rating level of a post."
 msgstr ""
 
 #. Translators: Name of the "source" search token
-#: tesys_tagboard/search.py:397
+#: tesys_tagboard/search.py:391
 msgid "source"
 msgstr ""
 
 #. Translators: Description for the "source" search token
-#: tesys_tagboard/search.py:399
+#: tesys_tagboard/search.py:393
 msgid "The source url of a post."
 msgstr ""
 
 #. Translators: Alias for the "source" search token
-#: tesys_tagboard/search.py:402
+#: tesys_tagboard/search.py:396
 msgid "src"
 msgstr ""
 
 #. Translators: Name of the "posted_by" search token
-#: tesys_tagboard/search.py:410
+#: tesys_tagboard/search.py:404
 msgid "posted_by"
 msgstr ""
 
 #. Translators: Description for the "posted_by" search token
-#: tesys_tagboard/search.py:412
+#: tesys_tagboard/search.py:406
 msgid "The username of the uploader of a post."
 msgstr ""
 
 #. Translators: Alias for the "posted_by" search token
-#: tesys_tagboard/search.py:415
+#: tesys_tagboard/search.py:409
 msgid "uploaded_by"
 msgstr ""
 
 #. Translators: Name of the "posted_on" search token
-#: tesys_tagboard/search.py:422
+#: tesys_tagboard/search.py:416
 msgid "posted_on"
 msgstr ""
 
 #. Translators: Description for the "posted_on" search token
-#: tesys_tagboard/search.py:424
+#: tesys_tagboard/search.py:418
 msgid "The date the post was posted on."
 msgstr ""
 
 #. Translators: Alias for the "posted_on" search token
-#: tesys_tagboard/search.py:427
+#: tesys_tagboard/search.py:421
 msgid "uploaded_on"
 msgstr ""
 
 #. Translators: Name of the "mimetype" search token
-#: tesys_tagboard/search.py:434
+#: tesys_tagboard/search.py:428
 msgid "mimetype"
 msgstr ""
 
 #. Translators: Description for the "mimetype" search token
-#: tesys_tagboard/search.py:436
+#: tesys_tagboard/search.py:430
 msgid "The MIME type of the post's file."
 msgstr ""
 
 #. Translators: Alias for the "mimetype" search token
-#: tesys_tagboard/search.py:439
+#: tesys_tagboard/search.py:433
 msgid "mime"
 msgstr ""
 
 #. Translators: Name of the "file_extension" search token
-#: tesys_tagboard/search.py:446
+#: tesys_tagboard/search.py:440
 msgid "file_extension"
 msgstr ""
 
 #. Translators: Description for the "file_extension" search token
-#: tesys_tagboard/search.py:448
+#: tesys_tagboard/search.py:442
 msgid "The file extension of the post's related file."
 msgstr ""
 
 #. Translators: Alias for the "file_extension" search token
-#: tesys_tagboard/search.py:451
+#: tesys_tagboard/search.py:445
 msgid "extension"
 msgstr ""
 
 #. Translators: Alias for the "file_extension" search token
-#: tesys_tagboard/search.py:453
+#: tesys_tagboard/search.py:447
 msgid "ext"
 msgstr ""
 
 #. Translators: Name of the "collection_id" search token
-#: tesys_tagboard/search.py:460
+#: tesys_tagboard/search.py:454
 msgid "collection_id"
 msgstr ""
 
 #. Translators: Description for the "collection_id" search token
-#: tesys_tagboard/search.py:462
+#: tesys_tagboard/search.py:456
 msgid "The ID of a collection."
 msgstr ""
 
 #. Translators: Description for the "collection" search token
-#: tesys_tagboard/search.py:470
+#: tesys_tagboard/search.py:464
 msgid "Whether or not a post is part of a collection (yes/no)."
 msgstr ""
 
 #. Translators: Alias for the "collection" search token
-#: tesys_tagboard/search.py:473
+#: tesys_tagboard/search.py:467
 msgid "in_collection"
 msgstr ""
 
 #. Translators: Name of the "collection_name" search token
-#: tesys_tagboard/search.py:480
+#: tesys_tagboard/search.py:474
 msgid "collection_name"
 msgstr ""
 
 #. Translators: Description for the "collection_name" search token
-#: tesys_tagboard/search.py:482
+#: tesys_tagboard/search.py:476
 msgid "A collection's name."
 msgstr ""
 
 #. Translators: Name of the "parent" search token
-#: tesys_tagboard/search.py:489
+#: tesys_tagboard/search.py:483
 msgid "parent"
 msgstr ""
 
 #. Translators: Description for the "parent" search token
-#: tesys_tagboard/search.py:491
+#: tesys_tagboard/search.py:485
 msgid "Whether or not a post has a parent (yes/no)."
 msgstr ""
 
 #. Translators: Name of the "parent_id" search token
-#: tesys_tagboard/search.py:497
+#: tesys_tagboard/search.py:491
 msgid "parent_id"
 msgstr ""
 
 #. Translators: Description for the "parent_id" search token
-#: tesys_tagboard/search.py:499
+#: tesys_tagboard/search.py:493
 msgid "Whether or not a post has a parent matching the given post ID."
 msgstr ""
 
 #. Translators: Name of the "children" search token
-#: tesys_tagboard/search.py:505
+#: tesys_tagboard/search.py:499
 msgid "children"
 msgstr ""
 
 #. Translators: Description for the "children" search token
-#: tesys_tagboard/search.py:507
+#: tesys_tagboard/search.py:501
 msgid "Whether or not a post has any children (yes/no)."
 msgstr ""
 
 #. Translators: Alias for the "children" search token
-#: tesys_tagboard/search.py:510
+#: tesys_tagboard/search.py:504
 msgid "child"
 msgstr ""
 
 #. Translators: Name of the "child_id" search token
-#: tesys_tagboard/search.py:517
+#: tesys_tagboard/search.py:511
 msgid "child_id"
 msgstr ""
 
 #. Translators: Description for the "child_id" search token
-#: tesys_tagboard/search.py:519
+#: tesys_tagboard/search.py:513
 msgid "Whether or not a post has a child post matching the given post ID."
 msgstr ""
 
@@ -603,7 +741,7 @@ msgid "Use a different email address"
 msgstr ""
 
 #: tesys_tagboard/templates/account/confirm_login_code.html:7
-#: tesys_tagboard/templates/account/login.html:7
+#: tesys_tagboard/templates/account/login.html:6
 #: tesys_tagboard/templates/account/request_login_code.html:7
 #: tesys_tagboard/templates/allauth/layouts/entrance.html:10
 #: tesys_tagboard/templates/mfa/authenticate.html:8
@@ -673,13 +811,6 @@ msgstr ""
 #: tesys_tagboard/templates/account/email_change.html:39
 #: tesys_tagboard/templates/account/phone_change.html:26
 msgid "Re-send Verification"
-msgstr ""
-
-#: tesys_tagboard/templates/account/email.html:52
-#: tesys_tagboard/templates/mfa/webauthn/authenticator_confirm_delete.html:18
-#: tesys_tagboard/templates/mfa/webauthn/authenticator_list.html:62
-#: tesys_tagboard/templates/socialaccount/connections.html:42
-msgid "Remove"
 msgstr ""
 
 #: tesys_tagboard/templates/account/email.html:61
@@ -930,31 +1061,15 @@ msgid ""
 "href=\"%(email_url)s\">issue a new email confirmation request</a>."
 msgstr ""
 
-#: tesys_tagboard/templates/account/login.html:14
+#: tesys_tagboard/templates/account/login.html:12
 msgid "Log In to your account"
 msgstr ""
 
-#: tesys_tagboard/templates/account/login.html:17
-msgid "Username"
-msgstr ""
-
-#: tesys_tagboard/templates/account/login.html:26
-msgid "Password"
-msgstr ""
-
-#: tesys_tagboard/templates/account/login.html:31
-msgid "Enter your password"
-msgstr ""
-
-#: tesys_tagboard/templates/account/login.html:37
-msgid "Remember me"
-msgstr ""
-
-#: tesys_tagboard/templates/account/login.html:39
+#: tesys_tagboard/templates/account/login.html:30
 msgid "Forgot password?"
 msgstr ""
 
-#: tesys_tagboard/templates/account/login.html:48
+#: tesys_tagboard/templates/account/login.html:40
 #, python-format
 msgid ""
 "\n"
@@ -1152,11 +1267,11 @@ msgstr ""
 msgid "Signup"
 msgstr ""
 
-#: tesys_tagboard/templates/account/signup.html:58
+#: tesys_tagboard/templates/account/signup.html:25
 msgid "Already have an account?"
 msgstr ""
 
-#: tesys_tagboard/templates/account/signup.html:59
+#: tesys_tagboard/templates/account/signup.html:26
 msgid "Log in"
 msgstr ""
 
@@ -1600,10 +1715,6 @@ msgstr ""
 msgid "Last used %(last_used)s"
 msgstr ""
 
-#: tesys_tagboard/templates/mfa/webauthn/authenticator_list.html:58
-msgid "Edit"
-msgstr ""
-
 #: tesys_tagboard/templates/mfa/webauthn/edit_form.html:9
 msgid "Edit Security Key"
 msgstr ""
@@ -1634,6 +1745,12 @@ msgstr ""
 #: tesys_tagboard/templates/nav/navbar_links.html:30
 #: tesys_tagboard/templates/usersessions/usersession_list.html:78
 msgid "Sign Out"
+msgstr ""
+
+#. Translators: label for "Create Collection" form
+#: tesys_tagboard/templates/pages/collections.html:13
+#: tesys_tagboard/views.py:930
+msgid "Create Collection"
 msgstr ""
 
 #: tesys_tagboard/templates/pages/help.html:13
@@ -1670,8 +1787,8 @@ msgstr ""
 
 #: tesys_tagboard/templates/pages/help.html:72
 msgid ""
-"Some search tokens may accept wildcards in the specified search value. These "
-"will make the filter more permissive, allowing resulting posts that match "
+"The wildcard modifer. Some search tokens may accept wildcards. These will "
+"make the filter more permissive, returning posts that match the given value "
 "where the wildcard(s) may be replaced with any value."
 msgstr ""
 
@@ -1706,6 +1823,24 @@ msgid ""
 "        <code class=\"py-3 px-4 bg-info text-info-content w-fit rounded-"
 "field\">source=https://discord.com* rating_label=unrated</code>\n"
 "      "
+msgstr ""
+
+#: tesys_tagboard/templates/pages/post.html:344
+msgid "Zoom"
+msgstr ""
+
+#. Translators: title  for "Create Tag Alias" modal form
+#: tesys_tagboard/templates/pages/tags.html:28 tesys_tagboard/views.py:562
+msgid "Create Tag Alias"
+msgstr ""
+
+#. Translators: title  for "Create Tag Category" modal form
+#: tesys_tagboard/templates/pages/tags.html:32 tesys_tagboard/views.py:722
+msgid "Create Tag Category"
+msgstr ""
+
+#: tesys_tagboard/templates/pages/tags.html:63
+msgid "Aliases"
 msgstr ""
 
 #: tesys_tagboard/templates/socialaccount/authentication_error.html:7
@@ -1800,6 +1935,18 @@ msgid ""
 "%(site_name)s. As a final step, please complete the following form:"
 msgstr ""
 
+#: tesys_tagboard/templates/tags/tags_by_category.html:12
+msgid "Tag Categories"
+msgstr ""
+
+#: tesys_tagboard/templates/users/user_detail.html:97
+msgid "No favorites yet!"
+msgstr ""
+
+#: tesys_tagboard/templates/users/user_detail.html:126
+msgid "No collections yet!"
+msgstr ""
+
 #: tesys_tagboard/templates/usersessions/messages/sessions_logged_out.txt:2
 msgid "Signed out of all other sessions."
 msgstr ""
@@ -1866,48 +2013,283 @@ msgstr ""
 msgid "Information successfully updated"
 msgstr ""
 
-#: tesys_tagboard/validators.py:17
+#: tesys_tagboard/validators.py:22
 msgid "Enter a valid tag name."
 msgstr ""
 
-#: tesys_tagboard/validators.py:22
-msgid "Enter a valid username."
-msgstr ""
-
-#: tesys_tagboard/validators.py:26
-msgid "Enter a positive integer."
+#: tesys_tagboard/validators.py:27
+msgid "Enter a valid tag token."
 msgstr ""
 
 #: tesys_tagboard/validators.py:32
-msgid "Enter a valid URL with wildcards"
+msgid "Enter a valid username."
 msgstr ""
 
 #: tesys_tagboard/validators.py:36
-msgid "Enter a date of the form: YYYY-MM-DD"
+msgid "Enter a positive integer."
 msgstr ""
 
-#: tesys_tagboard/validators.py:40
-msgid "Enter \"yes\" or \"no\""
+#: tesys_tagboard/validators.py:42
+msgid "Enter a valid URL with wildcards"
 msgstr ""
 
-#: tesys_tagboard/validators.py:44
+#: tesys_tagboard/validators.py:49
+msgid ""
+"Enter a date in the following format: <span class='font-bold font-mono'>YYYY-"
+"MM-DD</span>"
+msgstr ""
+
+#: tesys_tagboard/validators.py:57
+#, python-brace-format
+msgid "Enter {yes} or {no}"
+msgstr ""
+
+#: tesys_tagboard/validators.py:66
 msgid "Enter a valid collection name."
 msgstr ""
 
-#: tesys_tagboard/validators.py:48
+#: tesys_tagboard/validators.py:70
 msgid "Enter a valid collection name with wildcards."
 msgstr ""
 
-#: tesys_tagboard/validators.py:56
+#: tesys_tagboard/validators.py:78
 #, python-format
 msgid "The MIME type argument must match one of the supported MIME types: %s"
 msgstr ""
 
-#: tesys_tagboard/validators.py:65
+#: tesys_tagboard/validators.py:91
 #, python-format
 msgid "The file extension argument must match a supported file extension: %s"
 msgstr ""
 
-#: tesys_tagboard/validators.py:72
+#: tesys_tagboard/validators.py:98
 msgid "A tagset may only contain positive integers"
+msgstr ""
+
+#: tesys_tagboard/views.py:429
+#, python-format
+msgid ""
+"The tag \"%s\" could not be created. Tags must have a unique name and "
+"category."
+msgstr ""
+
+#: tesys_tagboard/views.py:437
+#, python-format
+msgid "The tag \"%s\" could not be created because of a database error."
+msgstr ""
+
+#: tesys_tagboard/views.py:443 tesys_tagboard/views.py:766
+#, python-format
+msgid "The tag \"%s\" was created successfully."
+msgstr ""
+
+#. Translators: title  for "Update Tag" modal form
+#: tesys_tagboard/views.py:463
+msgid "Update Tag"
+msgstr ""
+
+#. Translators: label for "Update Tag" submit button
+#. Translators: label for "Update Tag Alias" submit button
+#. Translators: label for "Update Tag Category" submit button
+#: tesys_tagboard/views.py:465 tesys_tagboard/views.py:620
+#: tesys_tagboard/views.py:788 tesys_tagboard/views.py:994
+msgid "Update"
+msgstr ""
+
+#: tesys_tagboard/views.py:488
+#, python-format
+msgid "The tag \"%s\" could not be updated because of a database error."
+msgstr ""
+
+#: tesys_tagboard/views.py:494
+#, python-format
+msgid "The \"%s\" tag was updated successfully."
+msgstr ""
+
+#. Translators: title  for "Delete Tag" modal form
+#: tesys_tagboard/views.py:514
+msgid "Delete Tag"
+msgstr ""
+
+#: tesys_tagboard/views.py:521
+msgid ""
+"Are you sure you want to delete this tag? This action cannot be undone "
+"except by an administrator."
+msgstr ""
+
+#: tesys_tagboard/views.py:533
+msgid "A tag with the given ID does not exist."
+msgstr ""
+
+#: tesys_tagboard/views.py:538 tesys_tagboard/views.py:868
+#, python-format
+msgid ""
+"The tag with an ID of \"%s\" could not be deleted because of a database "
+"error."
+msgstr ""
+
+#: tesys_tagboard/views.py:546 tesys_tagboard/views.py:876
+#, python-format
+msgid "The tag \"%s\" was deleted."
+msgstr ""
+
+#: tesys_tagboard/views.py:587
+#, python-format
+msgid "The tag alias \"%s\" already exists."
+msgstr ""
+
+#: tesys_tagboard/views.py:592
+msgid "The tag alias could not be created because of a database error."
+msgstr ""
+
+#: tesys_tagboard/views.py:598
+#, python-format
+msgid "The tag alias \"%s\" was created successfully."
+msgstr ""
+
+#. Translators: title  for "Update Tag Alias" modal form
+#: tesys_tagboard/views.py:618
+msgid "Update Tag Alias"
+msgstr ""
+
+#: tesys_tagboard/views.py:644
+#, python-format
+msgid "The tag alias \"%s\" could not be updated because of a database error."
+msgstr ""
+
+#: tesys_tagboard/views.py:652
+#, python-format
+msgid "The tag alias \"%s\" was updated successfully."
+msgstr ""
+
+#. Translators: title  for "Delete Tag Alias" modal form
+#: tesys_tagboard/views.py:672
+msgid "Delete Tag Alias"
+msgstr ""
+
+#: tesys_tagboard/views.py:679
+msgid ""
+"Are you sure you want to delete this tag alias? This action cannot be undone "
+"except by an administrator."
+msgstr ""
+
+#: tesys_tagboard/views.py:692
+msgid "A tag alias with the given ID does not exist."
+msgstr ""
+
+#: tesys_tagboard/views.py:698
+#, python-format
+msgid ""
+"The tag alias with an ID of \"%s\" could not be deleted because of a "
+"database error."
+msgstr ""
+
+#: tesys_tagboard/views.py:706
+#, python-format
+msgid "The tag alias \"%s\" was deleted."
+msgstr ""
+
+#: tesys_tagboard/views.py:749
+#, python-format
+msgid ""
+"The tag category \"%s\" could not be created. Tag categories must have a "
+"unique name and parent category."
+msgstr ""
+
+#: tesys_tagboard/views.py:758
+#, python-format
+msgid ""
+"The tag category \"%s\" could not be created because of a database error."
+msgstr ""
+
+#. Translators: title  for "Update Tag Category" modal form
+#: tesys_tagboard/views.py:786
+msgid "Update Tag Category"
+msgstr ""
+
+#: tesys_tagboard/views.py:814
+#, python-format
+msgid ""
+"The tag category \"%s\" could not be updated because of a database error."
+msgstr ""
+
+#: tesys_tagboard/views.py:822
+#, python-format
+msgid "The \"%s\" tag category was updated successfully."
+msgstr ""
+
+#. Translators: title  for "Delete Tag Category" modal form
+#. Translators: title  for "Delete Collection" modal form
+#: tesys_tagboard/views.py:842 tesys_tagboard/views.py:1055
+msgid "Delete Tag Category"
+msgstr ""
+
+#: tesys_tagboard/views.py:849
+msgid ""
+"Are you sure you want to delete this tag category? This action cannot be "
+"undone except by an administrator."
+msgstr ""
+
+#: tesys_tagboard/views.py:862
+msgid "A tag category with the given ID does not exist."
+msgstr ""
+
+#: tesys_tagboard/views.py:956
+#, python-format
+msgid ""
+"The collection \"%s\" could not be created. Collections must have a unique "
+"name and description."
+msgstr ""
+
+#: tesys_tagboard/views.py:965
+#, python-format
+msgid "The collection \"%s\" could not be created because of a database error."
+msgstr ""
+
+#: tesys_tagboard/views.py:973
+#, python-format
+msgid "The collection \"%s\" was created successfully."
+msgstr ""
+
+#. Translators: label for "Update Collection" form
+#: tesys_tagboard/views.py:991
+msgid "Update Collection"
+msgstr ""
+
+#: tesys_tagboard/views.py:1019
+#, python-format
+msgid ""
+"The collection \"%s\" could not be updated. Collections must have a unique "
+"name and description."
+msgstr ""
+
+#: tesys_tagboard/views.py:1028
+#, python-format
+msgid "The collection \"%s\" could not be updated because of a database error."
+msgstr ""
+
+#: tesys_tagboard/views.py:1036
+#, python-format
+msgid "The collection \"%s\" was updated successfully."
+msgstr ""
+
+#. Translators: Collection deletion confirmation message
+#: tesys_tagboard/views.py:1061
+msgid "Are you sure you want to delete this collection?"
+msgstr ""
+
+#: tesys_tagboard/views.py:1073
+msgid "A collection for the user with the given ID does not exist."
+msgstr ""
+
+#: tesys_tagboard/views.py:1079
+#, python-format
+msgid ""
+"The collection with an ID of \"%s\" could not be deleted because of a "
+"database error."
+msgstr ""
+
+#: tesys_tagboard/views.py:1087
+#, python-format
+msgid "The collection \"%s\" was deleted."
 msgstr ""

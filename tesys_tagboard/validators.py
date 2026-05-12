@@ -1,13 +1,14 @@
-import re
 from itertools import chain
 
 from django.conf import settings
 from django.core import validators
 from django.core.exceptions import ValidationError
 from django.utils.regex_helper import _lazy_re_compile
+from django.utils.text import format_lazy
 from django.utils.translation import gettext_lazy as _
 
 from .enums import RatingLevel
+from .enums import SearchBoolean
 from .enums import SupportedMediaType
 from .upload import fix_upload_content_type
 
@@ -47,10 +48,18 @@ iso_date_validator = validators.RegexValidator(
         "YYYY-MM-DD</span>"
     ),
 )
-yes_no_validator = validators.RegexValidator(
-    _lazy_re_compile(r"^(yes|no)$", re.IGNORECASE),
-    message=_('Enter "yes" or "no"'),
-)
+
+
+def yes_no_validator(arg: str):
+    if arg not in [x.value for x in SearchBoolean]:
+        msg = format_lazy(
+            _("Enter {yes} or {no}"),
+            yes=SearchBoolean.YES.value,
+            no=SearchBoolean.NO.value,
+        )
+        raise ValidationError(msg)
+
+
 collection_name_validator = validators.RegexValidator(
     _lazy_re_compile(r"^[a-zA-Z\d_\- ]+\Z"),
     message=_("Enter a valid collection name."),
