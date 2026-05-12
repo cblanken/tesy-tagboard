@@ -273,7 +273,7 @@
     box-shadow: var(--shadow-lg);
 
     & label {
-      font-size: var(-text-sm);
+      font-size: var(--text-sm);
 
       & + input {
         margin-top: --spacing(1);
