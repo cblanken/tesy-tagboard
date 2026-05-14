@@ -54,6 +54,7 @@ services:
     ports:
         - 8025:8025
         - 1025:1025
+    profiles: [all, debug]
     environment:
         MP_MAX_MESSAGES: 5000
         MP_DATABASE: /data/mailpit.db
