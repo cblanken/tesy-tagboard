@@ -1,20 +1,20 @@
 import factory
-from factory.declarations import Sequence
-from factory.declarations import SubFactory
+from factory.declarations import Sequence, SubFactory
 from factory.django import DjangoModelFactory
 from factory.faker import Faker
 from faker.providers import BaseProvider
 
-from tesys_tagboard.enums import RatingLevel
-from tesys_tagboard.enums import SupportedMediaType
-from tesys_tagboard.models import Collection
-from tesys_tagboard.models import Comment
-from tesys_tagboard.models import Favorite
-from tesys_tagboard.models import Image
-from tesys_tagboard.models import Post
-from tesys_tagboard.models import Tag
-from tesys_tagboard.models import TagAlias
-from tesys_tagboard.models import TagCategory
+from tesys_tagboard.enums import RatingLevel, SupportedMediaType
+from tesys_tagboard.models import (
+    Collection,
+    Comment,
+    Favorite,
+    Image,
+    Post,
+    Tag,
+    TagAlias,
+    TagCategory,
+)
 from tesys_tagboard.users.tests.factories import UserFactory
 
 

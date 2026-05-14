@@ -1,13 +1,8 @@
 import sys
-from itertools import chain
-from itertools import islice
+from itertools import chain, islice
 from pathlib import Path
-from random import choice
-from random import choices
-from random import randint
-from random import sample
-from typing import TYPE_CHECKING
-from typing import Annotated
+from random import choice, choices, randint, sample
+from typing import TYPE_CHECKING, Annotated
 
 import magic
 import typer
@@ -20,26 +15,23 @@ from django_typer.management import Typer
 from faker import Faker
 from PIL import UnidentifiedImageError
 from rich.console import Console
-from rich.progress import Progress
-from rich.progress import SpinnerColumn
-from rich.progress import TextColumn
-from rich.progress import track
+from rich.progress import Progress, SpinnerColumn, TextColumn, track
 
-from tesys_tagboard.enums import MediaCategory
-from tesys_tagboard.enums import RatingLevel
-from tesys_tagboard.enums import SupportedMediaType
-from tesys_tagboard.models import Audio
-from tesys_tagboard.models import Collection
-from tesys_tagboard.models import Comment
-from tesys_tagboard.models import Favorite
-from tesys_tagboard.models import Image
-from tesys_tagboard.models import Post
-from tesys_tagboard.models import Tag
-from tesys_tagboard.models import TagAlias
-from tesys_tagboard.models import TagCategory
-from tesys_tagboard.models import Video
-from tesys_tagboard.models import add_tag_history
-from tesys_tagboard.models import update_tag_post_counts
+from tesys_tagboard.enums import MediaCategory, RatingLevel, SupportedMediaType
+from tesys_tagboard.models import (
+    Audio,
+    Collection,
+    Comment,
+    Favorite,
+    Image,
+    Post,
+    Tag,
+    TagAlias,
+    TagCategory,
+    Video,
+    add_tag_history,
+    update_tag_post_counts,
+)
 from tesys_tagboard.upload import fix_upload_content_type
 from tesys_tagboard.users.models import User
 from tesys_tagboard.validators import media_file_supported_validator

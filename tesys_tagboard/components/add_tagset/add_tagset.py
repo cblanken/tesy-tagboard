@@ -1,7 +1,6 @@
 from django.urls import reverse
 from django.utils.translation import gettext as _
-from django_components import Component
-from django_components import register
+from django_components import Component, register
 
 from tesys_tagboard.components.tag.tag import Action
 

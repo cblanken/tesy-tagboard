@@ -1,8 +1,7 @@
 import pytest
 from django.core.exceptions import ValidationError
 
-from tesys_tagboard.validators import tag_name_validator
-from tesys_tagboard.validators import tagset_validator
+from tesys_tagboard.validators import tag_name_validator, tagset_validator
 
 
 class TestTagSet:

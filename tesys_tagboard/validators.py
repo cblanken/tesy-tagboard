@@ -7,9 +7,7 @@ from django.utils.regex_helper import _lazy_re_compile
 from django.utils.text import format_lazy
 from django.utils.translation import gettext_lazy as _
 
-from .enums import RatingLevel
-from .enums import SearchBoolean
-from .enums import SupportedMediaType
+from .enums import RatingLevel, SearchBoolean, SupportedMediaType
 from .upload import fix_upload_content_type
 
 rgb_validator = validators.RegexValidator(r"^#[0-9A-F]{6}$")

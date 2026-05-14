@@ -4,8 +4,7 @@ from typing import TYPE_CHECKING
 from django.template.loader import render_to_string
 from django.urls import reverse
 from django.utils.translation import gettext as _
-from django_components import Component
-from django_components import register
+from django_components import Component, register
 
 from tesys_tagboard.search import PostSearchTokenCategory
 
@@ -13,8 +12,7 @@ if TYPE_CHECKING:
     from django.contrib.auth.context_processors import PermWrapper
     from django.utils.safestring import SafeString
 
-    from tesys_tagboard.models import Tag
-    from tesys_tagboard.models import TagAlias
+    from tesys_tagboard.models import Tag, TagAlias
 
 
 @dataclass

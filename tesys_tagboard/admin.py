@@ -1,19 +1,21 @@
 from django.contrib import admin
 
-from .models import Artist
-from .models import Audio
-from .models import Collection
-from .models import Comment
-from .models import DefaultPostTag
-from .models import Favorite
-from .models import Image
-from .models import Post
-from .models import PostTagHistory
-from .models import SourceHistory
-from .models import Tag
-from .models import TagAlias
-from .models import TagCategory
-from .models import Video
+from .models import (
+    Artist,
+    Audio,
+    Collection,
+    Comment,
+    DefaultPostTag,
+    Favorite,
+    Image,
+    Post,
+    PostTagHistory,
+    SourceHistory,
+    Tag,
+    TagAlias,
+    TagCategory,
+    Video,
+)
 
 
 @admin.register(Tag)

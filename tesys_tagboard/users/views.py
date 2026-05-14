@@ -3,23 +3,22 @@ from typing import TYPE_CHECKING
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.core.paginator import Paginator
-from django.http import HttpRequest
-from django.http import HttpResponse
-from django.http import HttpResponseBadRequest
-from django.http import HttpResponseForbidden
-from django.shortcuts import get_object_or_404
-from django.shortcuts import redirect
+from django.http import (
+    HttpRequest,
+    HttpResponse,
+    HttpResponseBadRequest,
+    HttpResponseForbidden,
+)
+from django.shortcuts import get_object_or_404, redirect
 from django.template.response import TemplateResponse
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
-from django.views.generic import RedirectView
-from django.views.generic import UpdateView
+from django.views.generic import RedirectView, UpdateView
 
 from tesys_tagboard.decorators import require
 from tesys_tagboard.enums import RatingLevel
 from tesys_tagboard.forms import EditUserSettingsForm
-from tesys_tagboard.models import Collection
-from tesys_tagboard.models import Tag
+from tesys_tagboard.models import Collection, Tag
 
 from .models import User
 

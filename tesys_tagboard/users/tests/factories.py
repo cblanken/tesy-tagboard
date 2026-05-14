@@ -1,8 +1,6 @@
-from typing import TYPE_CHECKING
-from typing import Any
+from typing import TYPE_CHECKING, Any
 
-from factory import Faker
-from factory import post_generation
+from factory import Faker, post_generation
 from factory.django import DjangoModelFactory
 
 from tesys_tagboard.users.models import User

@@ -9,23 +9,19 @@ from django.core.files.uploadedfile import SimpleUploadedFile
 from django.urls import reverse
 from pytest_django.asserts import assertTemplateUsed
 
-from tesys_tagboard.enums import MediaCategory
-from tesys_tagboard.enums import RatingLevel
-from tesys_tagboard.models import Collection
-from tesys_tagboard.models import Comment
-from tesys_tagboard.models import Favorite
-from tesys_tagboard.models import Post
-from tesys_tagboard.models import Tag
-from tesys_tagboard.models import TagAlias
+from tesys_tagboard.enums import MediaCategory, RatingLevel
+from tesys_tagboard.models import Collection, Comment, Favorite, Post, Tag, TagAlias
 from tesys_tagboard.users.models import User
 from tesys_tagboard.users.tests.factories import UserFactory
 
-from .factories import CollectionFactory
-from .factories import CommentFactory
-from .factories import FavoriteFactory
-from .factories import PostFactory
-from .factories import TagAliasFactory
-from .factories import TagFactory
+from .factories import (
+    CollectionFactory,
+    CommentFactory,
+    FavoriteFactory,
+    PostFactory,
+    TagAliasFactory,
+    TagFactory,
+)
 
 # NOTE: most fixtures are defined in conftest.py
 

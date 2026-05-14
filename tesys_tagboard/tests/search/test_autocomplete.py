@@ -2,14 +2,14 @@
 
 import pytest
 
-from tesys_tagboard.models import Tag
-from tesys_tagboard.models import TagAlias
-from tesys_tagboard.models import TagCategory
-from tesys_tagboard.search import TAG_CATEGORY_DELIMITER
-from tesys_tagboard.search import PostSearch
-from tesys_tagboard.search import PostSearchTokenCategory
-from tesys_tagboard.search import autocomplete_tag_aliases
-from tesys_tagboard.search import autocomplete_tags
+from tesys_tagboard.models import Tag, TagAlias, TagCategory
+from tesys_tagboard.search import (
+    TAG_CATEGORY_DELIMITER,
+    PostSearch,
+    PostSearchTokenCategory,
+    autocomplete_tag_aliases,
+    autocomplete_tags,
+)
 
 
 @pytest.mark.django_db

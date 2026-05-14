@@ -15,15 +15,17 @@ from django.contrib.postgres.indexes import HashIndex
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.core.validators import MaxLengthValidator
 from django.db import models
-from django.db.models import BooleanField
-from django.db.models import Case
-from django.db.models import OuterRef
-from django.db.models import Prefetch
-from django.db.models import Q
-from django.db.models import QuerySet
-from django.db.models import Subquery
-from django.db.models import Value
-from django.db.models import When
+from django.db.models import (
+    BooleanField,
+    Case,
+    OuterRef,
+    Prefetch,
+    Q,
+    QuerySet,
+    Subquery,
+    Value,
+    When,
+)
 from django.utils import timezone
 from django.utils.timezone import now
 from django.utils.translation import gettext_lazy as _
@@ -31,20 +33,19 @@ from PIL import Image as PIL_Image
 
 from config.settings.base import AUTH_USER_MODEL
 
-from .enums import MediaCategory
-from .enums import RatingLevel
-from .enums import SupportedMediaType
+from .enums import MediaCategory, RatingLevel, SupportedMediaType
 from .upload import get_file_content_type
-from .validators import collection_name_validator
-from .validators import dhash_validator
-from .validators import md5_validator
-from .validators import mimetype_validator
-from .validators import phash_validator
-from .validators import tag_name_validator
+from .validators import (
+    collection_name_validator,
+    dhash_validator,
+    md5_validator,
+    mimetype_validator,
+    phash_validator,
+    tag_name_validator,
+)
 
 if TYPE_CHECKING:
-    from collections.abc import Iterable
-    from collections.abc import Sequence
+    from collections.abc import Iterable, Sequence
 
     from users.models import User
 

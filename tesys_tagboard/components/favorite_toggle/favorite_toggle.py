@@ -1,5 +1,4 @@
-from django_components import Component
-from django_components import register
+from django_components import Component, register
 
 
 @register("favorite_toggle")

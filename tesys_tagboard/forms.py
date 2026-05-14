@@ -1,17 +1,11 @@
 from django import forms
 from django.core.exceptions import ValidationError
-from django.core.validators import MaxLengthValidator
-from django.core.validators import URLValidator
+from django.core.validators import MaxLengthValidator, URLValidator
 from django.utils.translation import gettext_lazy as _
 
 from .enums import RatingLevel
-from .models import Collection
-from .models import Tag
-from .models import TagAlias
-from .models import TagCategory
-from .validators import rating_level_validator
-from .validators import tagset_name_validator
-from .validators import tagset_validator
+from .models import Collection, Tag, TagAlias, TagCategory
+from .validators import rating_level_validator, tagset_name_validator, tagset_validator
 
 
 def tagset_to_array(value) -> set[int] | None:

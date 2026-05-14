@@ -1,9 +1,7 @@
-from ninja import NinjaAPI
-from ninja import Schema
+from ninja import NinjaAPI, Schema
 from ninja.orm import create_schema
 
-from .models import Tag
-from .models import TagCategory
+from .models import Tag, TagCategory
 
 api = NinjaAPI()
 

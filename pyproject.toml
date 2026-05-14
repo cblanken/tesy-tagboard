@@ -126,7 +126,7 @@ ignore = [
 "tesys_tagboard/management/commands/*" = ["T201"]
 
 [tool.ruff.lint.isort]
-force-single-line = true
+force-single-line = false
 
 [tool.rstcheck]
 report_level = "WARNING"

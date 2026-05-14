@@ -1,7 +1,6 @@
 import re
 from array import array
-from dataclasses import dataclass
-from dataclasses import field
+from dataclasses import dataclass, field
 from enum import Enum
 from itertools import chain
 from typing import TYPE_CHECKING
@@ -9,39 +8,31 @@ from typing import TYPE_CHECKING
 from django.conf import settings
 from django.core import validators
 from django.core.exceptions import ValidationError
-from django.db.models import Q
-from django.db.models import QuerySet
+from django.db.models import Q, QuerySet
 from django.http import QueryDict
 from django.utils.safestring import SafeString
 from django.utils.translation import gettext_lazy as _
 from more_itertools import take
 
-from .enums import RatingLevel
-from .enums import SearchBoolean
-from .enums import SupportedMediaType
-from .enums import TokenArgRelation
-from .models import Post
-from .models import PostQuerySet
-from .models import Tag
-from .models import TagAlias
-from .models import TagCategory
-from .validators import collection_name_validator
-from .validators import file_extension_validator
-from .validators import iso_date_validator
-from .validators import mimetype_validator
-from .validators import positive_int_validator
-from .validators import rating_label_validator
-from .validators import tag_name_validator
-from .validators import tag_token_validator
-from .validators import username_validator
-from .validators import wildcard_collection_name_validator
-from .validators import wildcard_url_validator
-from .validators import yes_no_validator
+from .enums import RatingLevel, SearchBoolean, SupportedMediaType, TokenArgRelation
+from .models import Post, PostQuerySet, Tag, TagAlias, TagCategory
+from .validators import (
+    collection_name_validator,
+    file_extension_validator,
+    iso_date_validator,
+    mimetype_validator,
+    positive_int_validator,
+    rating_label_validator,
+    tag_name_validator,
+    tag_token_validator,
+    username_validator,
+    wildcard_collection_name_validator,
+    wildcard_url_validator,
+    yes_no_validator,
+)
 
 if TYPE_CHECKING:
-    from collections.abc import Callable
-    from collections.abc import Generator
-    from collections.abc import Iterable
+    from collections.abc import Callable, Generator, Iterable
 
     from colorfield.validators import RegexValidator
     from django_stubs_ext import StrOrPromise

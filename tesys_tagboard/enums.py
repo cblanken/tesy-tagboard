@@ -1,6 +1,5 @@
 from dataclasses import dataclass
-from enum import Enum
-from enum import StrEnum
+from enum import Enum, StrEnum
 from typing import Self
 
 from django.db.models import IntegerChoices

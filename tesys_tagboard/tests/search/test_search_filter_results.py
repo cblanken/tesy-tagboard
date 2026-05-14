@@ -6,20 +6,20 @@ import pytest
 from django.core.exceptions import ValidationError
 from django.utils import timezone
 
-from tesys_tagboard.enums import RatingLevel
-from tesys_tagboard.enums import SupportedMediaType
+from tesys_tagboard.enums import RatingLevel, SupportedMediaType
 from tesys_tagboard.models import Post
-from tesys_tagboard.search import TAG_CATEGORY_DELIMITER
-from tesys_tagboard.search import PostSearch
-from tesys_tagboard.tests.factories import CollectionFactory
-from tesys_tagboard.tests.factories import CommentFactory
-from tesys_tagboard.tests.factories import FavoriteFactory
-from tesys_tagboard.tests.factories import ImageFactory
-from tesys_tagboard.tests.factories import PostFactory
-from tesys_tagboard.tests.factories import TagAliasFactory
-from tesys_tagboard.tests.factories import TagCategoryFactory
-from tesys_tagboard.tests.factories import TagFactory
-from tesys_tagboard.tests.factories import UserFactory
+from tesys_tagboard.search import TAG_CATEGORY_DELIMITER, PostSearch
+from tesys_tagboard.tests.factories import (
+    CollectionFactory,
+    CommentFactory,
+    FavoriteFactory,
+    ImageFactory,
+    PostFactory,
+    TagAliasFactory,
+    TagCategoryFactory,
+    TagFactory,
+    UserFactory,
+)
 
 
 @pytest.mark.django_db

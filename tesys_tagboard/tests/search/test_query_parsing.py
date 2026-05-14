@@ -3,12 +3,14 @@ import contextlib
 import pytest
 from django.core.exceptions import ValidationError
 
-from tesys_tagboard.search import SEARCH_ARG_QUOTE
-from tesys_tagboard.search import TAG_CATEGORY_DELIMITER
-from tesys_tagboard.search import PostSearch
-from tesys_tagboard.search import PostSearchTokenCategory
-from tesys_tagboard.search import TokenArgRelation
-from tesys_tagboard.search import UnevenArgumentQuotesError
+from tesys_tagboard.search import (
+    SEARCH_ARG_QUOTE,
+    TAG_CATEGORY_DELIMITER,
+    PostSearch,
+    PostSearchTokenCategory,
+    TokenArgRelation,
+    UnevenArgumentQuotesError,
+)
 
 
 class TestTagTokenQueryParsing:

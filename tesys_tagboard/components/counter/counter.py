@@ -1,6 +1,5 @@
 from django.templatetags.static import static
-from django_components import Component
-from django_components import register
+from django_components import Component, register
 
 
 @register("counter")

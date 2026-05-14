@@ -2,8 +2,7 @@ from dataclasses import dataclass
 from http import HTTPStatus
 from itertools import chain
 from pathlib import Path
-from typing import TYPE_CHECKING
-from typing import Any
+from typing import TYPE_CHECKING, Any
 
 import markdown
 from django.conf import settings
@@ -11,65 +10,66 @@ from django.contrib import messages
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import permission_required
 from django.contrib.messages.storage.base import Message
-from django.core.exceptions import PermissionDenied
-from django.core.exceptions import ValidationError
+from django.core.exceptions import PermissionDenied, ValidationError
 from django.core.paginator import Paginator
-from django.db.models import F
-from django.db.models import OrderBy
-from django.db.models import Q
-from django.db.utils import DatabaseError
-from django.db.utils import IntegrityError
-from django.http import HttpRequest
-from django.http import HttpResponse
-from django.http import HttpResponseBadRequest
-from django.http import HttpResponseForbidden
-from django.http import HttpResponseNotFound
+from django.db.models import F, OrderBy, Q
+from django.db.utils import DatabaseError, IntegrityError
+from django.http import (
+    HttpRequest,
+    HttpResponse,
+    HttpResponseBadRequest,
+    HttpResponseForbidden,
+    HttpResponseNotFound,
+)
 from django.http.response import HttpResponseNotAllowed
-from django.shortcuts import get_object_or_404
-from django.shortcuts import redirect
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, redirect, render
 from django.template.response import TemplateResponse
 from django.urls import reverse
-from django.utils.safestring import SafeString
-from django.utils.safestring import mark_safe
+from django.utils.safestring import SafeString, mark_safe
 from django.utils.translation import gettext as _
 
 from .components.add_tagset.add_tagset import AddTagsetComponent
 from .components.comment.comment import CommentComponent
 from .components.favorite_toggle.favorite_toggle import FavoriteToggleComponent
 from .decorators import require
-from .enums import MediaCategory
-from .enums import RatingLevel
-from .enums import SupportedMediaType
-from .forms import AddCommentForm
-from .forms import CollectionForm
-from .forms import EditCommentForm
-from .forms import PostForm
-from .forms import TagAliasForm
-from .forms import TagCategoryForm
-from .forms import TagForm
-from .forms import TagsetForm
-from .forms import tagset_to_array
-from .models import Audio
-from .models import Collection
-from .models import Comment
-from .models import DefaultPostTag
-from .models import Favorite
-from .models import Image
-from .models import Post
-from .models import Tag
-from .models import TagAlias
-from .models import TagCategory
-from .models import Video
-from .models import csv_to_tag_ids
-from .search import PostSearch
-from .search import PostSearchTokenCategory
-from .search import SearchTokenFilterNotImplementedError
-from .search import autocomplete_tag_aliases
-from .search import autocomplete_tags
-from .validators import media_file_supported_validator
-from .validators import media_file_type_matches_ext_validator
-from .validators import tagset_validator
+from .enums import MediaCategory, RatingLevel, SupportedMediaType
+from .forms import (
+    AddCommentForm,
+    CollectionForm,
+    EditCommentForm,
+    PostForm,
+    TagAliasForm,
+    TagCategoryForm,
+    TagForm,
+    TagsetForm,
+    tagset_to_array,
+)
+from .models import (
+    Audio,
+    Collection,
+    Comment,
+    DefaultPostTag,
+    Favorite,
+    Image,
+    Post,
+    Tag,
+    TagAlias,
+    TagCategory,
+    Video,
+    csv_to_tag_ids,
+)
+from .search import (
+    PostSearch,
+    PostSearchTokenCategory,
+    SearchTokenFilterNotImplementedError,
+    autocomplete_tag_aliases,
+    autocomplete_tags,
+)
+from .validators import (
+    media_file_supported_validator,
+    media_file_type_matches_ext_validator,
+    tagset_validator,
+)
 
 if TYPE_CHECKING:
     from django.contrib.auth.models import AnonymousUser

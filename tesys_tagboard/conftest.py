@@ -1,9 +1,7 @@
 import pytest
 from django.contrib.auth.models import Permission
 
-from tesys_tagboard.models import Tag
-from tesys_tagboard.models import TagAlias
-from tesys_tagboard.models import TagCategory
+from tesys_tagboard.models import Tag, TagAlias, TagCategory
 from tesys_tagboard.users.models import User
 from tesys_tagboard.users.tests.factories import UserFactory
 
