@@ -141,5 +141,15 @@ make-component name:
     echo '    js_file = "{{name}}.js"' >> "$py_file"
 
 clean-media:
-    echo "Cleaning out media folder..."
+    @echo "Cleaning out media folder..."
     rm -rf tesys_tagboard/media/*
+
+# Begin a session with the Redis CLI
+redis:
+    @echo "Connecting to the Redis CLI..."
+    @docker compose exec redis redis-cli
+
+# Flush all entries from the caching backend
+flush-cache:
+    @echo "Flushing all entries of the cache..."
+    @just manage clear_cache
