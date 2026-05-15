@@ -17,18 +17,18 @@ from more_itertools import take
 from .enums import RatingLevel, SearchBoolean, SupportedMediaType, TokenArgRelation
 from .models import Post, PostQuerySet, Tag, TagAlias, TagCategory
 from .validators import (
-    collection_name_validator,
-    file_extension_validator,
-    iso_date_validator,
-    mimetype_validator,
-    positive_int_validator,
-    rating_label_validator,
-    tag_name_validator,
-    tag_token_validator,
-    username_validator,
-    wildcard_collection_name_validator,
-    wildcard_url_validator,
-    yes_no_validator,
+    validate_collection_name,
+    validate_file_extension,
+    validate_iso_date,
+    validate_mimetype,
+    validate_positive_int,
+    validate_rating_label,
+    validate_tag_name,
+    validate_tag_token,
+    validate_username,
+    validate_wildcard_collection_name,
+    validate_wildcard_url,
+    validate_yes_no,
 )
 
 if TYPE_CHECKING:
@@ -248,14 +248,14 @@ class PostSearchTokenCategory(Enum):
             "The default (un-named) token. When a plain string without any operator "
             "is given it will be interpreted as a tag name."
         ),
-        arg_validator=tag_token_validator,
+        arg_validator=validate_tag_token,
     )
 
     TAG_ID = SimpleSearchTokenCategory(
         name=_("tag_id"),
         # Translators: Description for the "tag_id" search token
         desc=_("The ID of a tag."),
-        arg_validator=positive_int_validator,
+        arg_validator=validate_positive_int,
     )
 
     POST_ID = ComparisonSearchTokenCategory(
@@ -263,7 +263,7 @@ class PostSearchTokenCategory(Enum):
         name=_("id"),
         # Translators: Description for the "id" search token
         desc=_("The ID of a post."),
-        arg_validator=positive_int_validator,
+        arg_validator=validate_positive_int,
     )
 
     TAG_ALIAS = WildcardSearchTokenCategory(
@@ -275,7 +275,7 @@ class PostSearchTokenCategory(Enum):
             # Translators: Alias for the "alias" search token
             _("tag_alias"),
         ),
-        arg_validator=tag_name_validator,
+        arg_validator=validate_tag_name,
     )
 
     TAG_COUNT = ComparisonSearchTokenCategory(
@@ -287,7 +287,7 @@ class PostSearchTokenCategory(Enum):
             # Translators: Alias for the "tag_count" search token
             _("tc"),
         ),
-        arg_validator=positive_int_validator,
+        arg_validator=validate_positive_int,
     )
 
     COMMENT_BY = WildcardSearchTokenCategory(
@@ -301,7 +301,7 @@ class PostSearchTokenCategory(Enum):
             # Translators: Alias for the "comment_by" search token
             _("cb"),
         ),
-        arg_validator=username_validator,
+        arg_validator=validate_username,
     )
 
     COMMENT_COUNT = ComparisonSearchTokenCategory(
@@ -313,7 +313,7 @@ class PostSearchTokenCategory(Enum):
             # Translators: Alias for the "comment_count" search token
             _("cc"),
         ),
-        arg_validator=positive_int_validator,
+        arg_validator=validate_positive_int,
     )
 
     FAV_COUNT = ComparisonSearchTokenCategory(
@@ -327,7 +327,7 @@ class PostSearchTokenCategory(Enum):
             # Translators: Alias for the "fav_count" search token
             _("fc"),
         ),
-        arg_validator=positive_int_validator,
+        arg_validator=validate_positive_int,
     )
 
     HEIGHT = ComparisonSearchTokenCategory(
@@ -368,7 +368,7 @@ class PostSearchTokenCategory(Enum):
             # Translators: Alias for the "rating_label" search token
             _("r"),
         ),
-        arg_validator=rating_label_validator,
+        arg_validator=validate_rating_label,
     )
 
     RATING_NUM = ComparisonSearchTokenCategory(
@@ -387,7 +387,7 @@ class PostSearchTokenCategory(Enum):
             _("src"),
         ),
         arg_validator=validators.URLValidator(),
-        wildcard_arg_validator=wildcard_url_validator,
+        wildcard_arg_validator=validate_wildcard_url,
     )
 
     POSTED_BY = WildcardSearchTokenCategory(
@@ -399,7 +399,7 @@ class PostSearchTokenCategory(Enum):
             # Translators: Alias for the "posted_by" search token
             _("uploaded_by"),
         ),
-        arg_validator=username_validator,
+        arg_validator=validate_username,
     )
 
     POSTED_ON = ComparisonSearchTokenCategory(
@@ -411,7 +411,7 @@ class PostSearchTokenCategory(Enum):
             # Translators: Alias for the "posted_on" search token
             _("uploaded_on"),
         ),
-        arg_validator=iso_date_validator,
+        arg_validator=validate_iso_date,
     )
 
     MIMETYPE = SimpleSearchTokenCategory(
@@ -423,7 +423,7 @@ class PostSearchTokenCategory(Enum):
             # Translators: Alias for the "mimetype" search token
             _("mime"),
         ),
-        arg_validator=mimetype_validator,
+        arg_validator=validate_mimetype,
     )
 
     FILE_EXTENSION = SimpleSearchTokenCategory(
@@ -437,7 +437,7 @@ class PostSearchTokenCategory(Enum):
             # Translators: Alias for the "file_extension" search token
             _("ext"),
         ),
-        arg_validator=file_extension_validator,
+        arg_validator=validate_file_extension,
     )
 
     COLLECTION_ID = ComparisonSearchTokenCategory(
@@ -445,7 +445,7 @@ class PostSearchTokenCategory(Enum):
         name=_("collection_id"),
         # Translators: Description for the "collection_id" search token
         desc=_("The ID of a collection."),
-        arg_validator=positive_int_validator,
+        arg_validator=validate_positive_int,
     )
 
     COLLECTION = SimpleSearchTokenCategory(
@@ -457,7 +457,7 @@ class PostSearchTokenCategory(Enum):
             # Translators: Alias for the "collection" search token
             _("in_collection"),
         ),
-        arg_validator=yes_no_validator,
+        arg_validator=validate_yes_no,
     )
 
     COLLECTION_NAME = WildcardSearchTokenCategory(
@@ -465,8 +465,8 @@ class PostSearchTokenCategory(Enum):
         name=_("collection_name"),
         # Translators: Description for the "collection_name" search token
         desc=_("A collection's name."),
-        arg_validator=collection_name_validator,
-        wildcard_arg_validator=wildcard_collection_name_validator,
+        arg_validator=validate_collection_name,
+        wildcard_arg_validator=validate_wildcard_collection_name,
     )
 
     PARENT = SimpleSearchTokenCategory(
@@ -474,7 +474,7 @@ class PostSearchTokenCategory(Enum):
         name=_("parent"),
         # Translators: Description for the "parent" search token
         desc=_("Whether or not a post has a parent (yes/no)."),
-        arg_validator=yes_no_validator,
+        arg_validator=validate_yes_no,
     )
 
     PARENT_ID = SimpleSearchTokenCategory(
@@ -482,7 +482,7 @@ class PostSearchTokenCategory(Enum):
         name=_("parent_id"),
         # Translators: Description for the "parent_id" search token
         desc=_("Whether or not a post has a parent matching the given post ID."),
-        arg_validator=positive_int_validator,
+        arg_validator=validate_positive_int,
     )
 
     CHILD = SimpleSearchTokenCategory(
@@ -494,7 +494,7 @@ class PostSearchTokenCategory(Enum):
             # Translators: Alias for the "children" search token
             _("child"),
         ),
-        arg_validator=yes_no_validator,
+        arg_validator=validate_yes_no,
     )
 
     CHILD_ID = SimpleSearchTokenCategory(
@@ -502,7 +502,7 @@ class PostSearchTokenCategory(Enum):
         name=_("child_id"),
         # Translators: Description for the "child_id" search token
         desc=_("Whether or not a post has a child post matching the given post ID."),
-        arg_validator=positive_int_validator,
+        arg_validator=validate_positive_int,
     )
 
     @classmethod

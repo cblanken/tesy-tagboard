@@ -36,12 +36,12 @@ from config.settings.base import AUTH_USER_MODEL
 from .enums import MediaCategory, RatingLevel, SupportedMediaType
 from .upload import get_file_content_type
 from .validators import (
-    collection_name_validator,
-    dhash_validator,
-    md5_validator,
-    mimetype_validator,
-    phash_validator,
-    tag_name_validator,
+    validate_collection_name,
+    validate_dhash,
+    validate_md5,
+    validate_mimetype,
+    validate_phash,
+    validate_tag_name,
 )
 
 if TYPE_CHECKING:
@@ -489,7 +489,7 @@ class Tag(models.Model):
         rating_level: PositiveSmallIntegerField
     """
 
-    name = models.CharField(max_length=100, validators=[tag_name_validator])
+    name = models.CharField(max_length=100, validators=[validate_tag_name])
     category = models.ForeignKey(
         TagCategory, null=True, on_delete=models.CASCADE, blank=True
     )
@@ -555,7 +555,7 @@ class TagAliasQuerySet(models.QuerySet):
 class TagAlias(models.Model):
     """Aliases for Tags"""
 
-    name = models.CharField(max_length=100, validators=[tag_name_validator])
+    name = models.CharField(max_length=100, validators=[validate_tag_name])
     tag = models.ForeignKey(Tag, on_delete=models.CASCADE)
 
     aliases = TagAliasManager()
@@ -600,7 +600,7 @@ class Image(models.Model):
     """Media linked to static image files"""
 
     post = models.OneToOneField(Post, on_delete=models.CASCADE, null=True)
-    mimetype = models.CharField(max_length=30, validators=[mimetype_validator])
+    mimetype = models.CharField(max_length=30, validators=[validate_mimetype])
     orig_name = models.TextField(default="")
     file = models.ImageField(
         upload_to=media_upload_path,
@@ -624,13 +624,13 @@ class Image(models.Model):
     )
 
     """MD5 hash"""
-    md5 = models.CharField(validators=[md5_validator])
+    md5 = models.CharField(validators=[validate_md5])
 
     """Perceptual (DCT) hash"""
-    phash: models.CharField = models.CharField(validators=[phash_validator])
+    phash: models.CharField = models.CharField(validators=[validate_phash])
 
     """Difference hash"""
-    dhash: models.CharField = models.CharField(validators=[dhash_validator])
+    dhash: models.CharField = models.CharField(validators=[validate_dhash])
 
     # TODO: add duplicate detection
     # See https://github.com/JohannesBuchner/imagehash/issues/127 for
@@ -689,12 +689,12 @@ class Video(models.Model):
     """Media linked to static video files"""
 
     post = models.OneToOneField(Post, on_delete=models.CASCADE, null=True)
-    mimetype = models.CharField(max_length=30, validators=[mimetype_validator])
+    mimetype = models.CharField(max_length=30, validators=[validate_mimetype])
     orig_name = models.TextField(default="")
     file = models.FileField(upload_to=media_upload_path, unique=True)
 
     """MD5 hash"""
-    md5 = models.CharField(validators=[md5_validator])
+    md5 = models.CharField(validators=[validate_md5])
 
     class Meta:
         verbose_name = _("video")
@@ -721,12 +721,12 @@ class Audio(models.Model):
     """Media linked to static audio files"""
 
     post = models.OneToOneField(Post, on_delete=models.CASCADE, null=True)
-    mimetype = models.CharField(max_length=30, validators=[mimetype_validator])
+    mimetype = models.CharField(max_length=30, validators=[validate_mimetype])
     orig_name = models.TextField(default="")
     file = models.FileField(upload_to=media_upload_path, unique=True)
 
     """MD5 hash"""
-    md5 = models.CharField(validators=[md5_validator])
+    md5 = models.CharField(validators=[validate_md5])
 
     class Meta:
         verbose_name = _("audio")
@@ -813,7 +813,7 @@ class Collection(models.Model):
 
     user = models.ForeignKey(AUTH_USER_MODEL, on_delete=models.CASCADE)
     name = models.CharField(
-        max_length=128, validators=[collection_name_validator, MaxLengthValidator(128)]
+        max_length=128, validators=[validate_collection_name, MaxLengthValidator(128)]
     )
     desc = models.TextField(max_length=1024, validators=[MaxLengthValidator(500)])
     posts = models.ManyToManyField(Post)

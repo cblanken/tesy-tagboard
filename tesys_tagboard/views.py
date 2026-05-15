@@ -66,9 +66,9 @@ from .search import (
     autocomplete_tags,
 )
 from .validators import (
-    media_file_supported_validator,
-    media_file_type_matches_ext_validator,
-    tagset_validator,
+    validate_media_file_type_matches_ext,
+    validate_supported_media_file,
+    validate_tagset,
 )
 
 if TYPE_CHECKING:
@@ -253,7 +253,7 @@ def confirm_tagset(request: HtmxHttpRequest):
 
             # Confirm tagset for target tagset_name exists and is valid
             try:
-                tagset_validator(tagset)
+                validate_tagset(tagset)
                 if tagset:
                     tags = Tag.tags.in_tagset(tagset)
                     kwargs = {
@@ -1323,8 +1323,8 @@ def handle_media_upload(file: UploadedFile | None, src_url: str | None) -> tuple
         raise ValidationError(msg)
 
     validators = [
-        media_file_supported_validator,
-        media_file_type_matches_ext_validator,
+        validate_supported_media_file,
+        validate_media_file_type_matches_ext,
     ]
     for validator in validators:
         validator(file)
@@ -1374,7 +1374,7 @@ def upload(request: HtmxHttpRequest) -> TemplateResponse | HttpResponse:  # noqa
 
         if tagset := form.cleaned_data.get("tagset"):
             try:
-                tagset_validator(tagset)
+                validate_tagset(tagset)
             except ValidationError:
                 return HttpUnprocessableContent("Invalid form data")
 

@@ -34,7 +34,7 @@ from tesys_tagboard.models import (
 )
 from tesys_tagboard.upload import fix_upload_content_type
 from tesys_tagboard.users.models import User
-from tesys_tagboard.validators import media_file_supported_validator
+from tesys_tagboard.validators import validate_supported_media_file
 
 console = Console()
 
@@ -404,7 +404,7 @@ def create_random_posts(  # noqa: C901, PLR0912, PLR0915
         uploaded_file = UploadedFile(fp)
         magic_mime = magic.from_file(file, mime=True)
         try:
-            media_file_supported_validator(uploaded_file)
+            validate_supported_media_file(uploaded_file)
             uploaded_file = fix_upload_content_type(uploaded_file)
         except ValidationError as err:
             console.print(

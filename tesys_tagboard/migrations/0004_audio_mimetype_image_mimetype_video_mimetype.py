@@ -14,19 +14,19 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='audio',
             name='mimetype',
-            field=models.CharField(default='image/png', max_length=30, validators=[tesys_tagboard.validators.mimetype_validator]),
+            field=models.CharField(default='image/png', max_length=30, validators=[tesys_tagboard.validators.validate_mimetype]),
             preserve_default=False,
         ),
         migrations.AddField(
             model_name='image',
             name='mimetype',
-            field=models.CharField(default='image/png', max_length=30, validators=[tesys_tagboard.validators.mimetype_validator]),
+            field=models.CharField(default='image/png', max_length=30, validators=[tesys_tagboard.validators.validate_mimetype]),
             preserve_default=False,
         ),
         migrations.AddField(
             model_name='video',
             name='mimetype',
-            field=models.CharField(default='image/png', max_length=30, validators=[tesys_tagboard.validators.mimetype_validator]),
+            field=models.CharField(default='image/png', max_length=30, validators=[tesys_tagboard.validators.validate_mimetype]),
             preserve_default=False,
         ),
     ]

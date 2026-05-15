@@ -10,34 +10,34 @@ from django.utils.translation import gettext_lazy as _
 from .enums import RatingLevel, SearchBoolean, SupportedMediaType
 from .upload import fix_upload_content_type
 
-rgb_validator = validators.RegexValidator(r"^#[0-9A-F]{6}$")
-md5_validator = validators.RegexValidator(r"^[0-9A-Z]{32}$")
-phash_validator = validators.RegexValidator(r"^[0-9a-z]{16}$")
-dhash_validator = validators.RegexValidator(r"^[0-9a-z]{16}$")
-tag_name_validator = validators.RegexValidator(
+validate_rgb = validators.RegexValidator(r"^#[0-9A-F]{6}$")
+validate_md5 = validators.RegexValidator(r"^[0-9A-Z]{32}$")
+validate_phash = validators.RegexValidator(r"^[0-9a-z]{16}$")
+validate_dhash = validators.RegexValidator(r"^[0-9a-z]{16}$")
+validate_tag_name = validators.RegexValidator(
     _lazy_re_compile(r"^[a-zA-Z\d\:-_]+$"), message=_("Enter a valid tag name.")
 )
 
-tag_token_validator = validators.RegexValidator(
+validate_tag_token = validators.RegexValidator(
     _lazy_re_compile(r"^[a-zA-Z\d\:-_" + settings.TAG_CATEGORY_DELIMITER + "]+$"),
     message=_("Enter a valid tag token."),
 )
-tagset_name_validator = validators.RegexValidator(r"^[a-z\d\-_]+$")
-username_validator = validators.RegexValidator(
+validate_tagset_name = validators.RegexValidator(r"^[a-z\d\-_]+$")
+validate_username = validators.RegexValidator(
     _lazy_re_compile(r"^[a-zA-Z\d_\-]+\Z"),
     message=_("Enter a valid username."),
 )
-positive_int_validator = validators.RegexValidator(
+validate_positive_int = validators.RegexValidator(
     _lazy_re_compile(r"^\d+$"),
     message=_("Enter a positive integer."),
 )
-wildcard_url_validator = validators.RegexValidator(
+validate_wildcard_url = validators.RegexValidator(
     # For allowing URLs with wildcards and without requiring
     # a protocol specifier or other URL validation
     r"[ A-Za-z0-9-.,_~:\/#@!$&';%=\*\+\(\)\?\[\]]",
     message=_("Enter a valid URL with wildcards"),
 )
-iso_date_validator = validators.RegexValidator(
+validate_iso_date = validators.RegexValidator(
     _lazy_re_compile(
         r"^\d{4}-\d{2}-\d{2}(?:T\d{2}:\d{2}(?:\:\d{2})?(?:\+\d{2}:\d{2})?)?$"
     ),
@@ -48,7 +48,7 @@ iso_date_validator = validators.RegexValidator(
 )
 
 
-def yes_no_validator(arg: str):
+def validate_yes_no(arg: str):
     if arg not in [x.value for x in SearchBoolean]:
         msg = format_lazy(
             _("Enter {yes} or {no}"),
@@ -58,17 +58,17 @@ def yes_no_validator(arg: str):
         raise ValidationError(msg)
 
 
-collection_name_validator = validators.RegexValidator(
+validate_collection_name = validators.RegexValidator(
     _lazy_re_compile(r"^[a-zA-Z\d_\- ]+\Z"),
     message=_("Enter a valid collection name."),
 )
-wildcard_collection_name_validator = validators.RegexValidator(
+validate_wildcard_collection_name = validators.RegexValidator(
     _lazy_re_compile(r"^[a-zA-Z\d_\-\.\s]+\Z"),
     message=_("Enter a valid collection name with wildcards."),
 )
 
 
-def mimetype_validator(mimetype: str):
+def validate_mimetype(mimetype: str):
     mimetypes = [smt.value.get_mimetype() for smt in SupportedMediaType]
     if not SupportedMediaType.select_by_mime(mimetype):
         msg = _(
@@ -79,7 +79,7 @@ def mimetype_validator(mimetype: str):
         raise ValidationError(msg)
 
 
-def file_extension_validator(ext: str):
+def validate_file_extension(ext: str):
     extensions = sorted(
         set(chain(*[smt.value.extensions for smt in SupportedMediaType]))
     )
@@ -90,7 +90,7 @@ def file_extension_validator(ext: str):
         raise ValidationError(msg)
 
 
-def tagset_validator(tag_ids: list):
+def validate_tagset(tag_ids: list):
     """Validates a tagset. A Sequence of positive integers."""
     msg = _("A tagset may only contain positive integers")
     try:
@@ -102,7 +102,7 @@ def tagset_validator(tag_ids: list):
         raise ValidationError(msg) from e
 
 
-def media_file_supported_validator(file):
+def validate_supported_media_file(file):
     try:
         fix_upload_content_type(file)
     except UnicodeDecodeError as err:
@@ -113,12 +113,12 @@ def media_file_supported_validator(file):
         raise ValidationError(msg)
 
 
-def media_file_type_matches_ext_validator(file):
+def validate_media_file_type_matches_ext(file):
     # TODO
     return
 
 
-def rating_label_validator(value: str):
+def validate_rating_label(value: str):
     value = value.lower()
     rating_labels = [x.name.lower() for x in RatingLevel]
     if value not in rating_labels:
@@ -127,7 +127,7 @@ def rating_label_validator(value: str):
         raise ValidationError(msg)
 
 
-def rating_level_validator(value):
+def validate_rating_level(value):
     rating_levels = [x.value for x in RatingLevel]
     if value not in rating_levels:
         msg = f"Rating levels must be one of {rating_levels}"
