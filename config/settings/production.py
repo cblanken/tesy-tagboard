@@ -1,5 +1,5 @@
 from .base import *  # noqa: F403
-from .base import INSTALLED_APPS, REDIS_URL, env
+from .base import INSTALLED_APPS, env
 
 # GENERAL
 # ------------------------------------------------------------------------------
@@ -8,21 +8,6 @@ PRODUCTION = True
 SECRET_KEY = env("DJANGO_SECRET_KEY")
 # https://docs.djangoproject.com/en/dev/ref/settings/#allowed-hosts
 ALLOWED_HOSTS = env.list("DJANGO_ALLOWED_HOSTS")
-
-# CACHES
-# ------------------------------------------------------------------------------
-CACHES = {
-    "default": {
-        "BACKEND": "django_redis.cache.RedisCache",
-        "LOCATION": REDIS_URL,
-        "OPTIONS": {
-            "CLIENT_CLASS": "django_redis.client.DefaultClient",
-            # Mimicking memcache behavior.
-            # https://github.com/jazzband/django-redis#memcached-exceptions-behavior
-            "IGNORE_EXCEPTIONS": True,
-        },
-    },
-}
 
 # SECURITY
 # ------------------------------------------------------------------------------

@@ -350,9 +350,23 @@ LOGGING = {
     "root": {"level": "INFO", "handlers": ["console"]},
 }
 
+
+# CACHES
+# ------------------------------------------------------------------------------
 REDIS_URL = env.url("REDIS_URL", default="redis://redis:6379/0").geturl()
 REDIS_SSL = REDIS_URL.startswith("rediss://")
-
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": REDIS_URL,
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+            # Mimicking memcache behavior.
+            # https://github.com/jazzband/django-redis#memcached-exceptions-behavior
+            "IGNORE_EXCEPTIONS": True,
+        },
+    },
+}
 
 # django-allauth
 # ------------------------------------------------------------------------------

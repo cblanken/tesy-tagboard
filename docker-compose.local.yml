@@ -45,6 +45,15 @@ services:
         required: false
     profiles: [all, debug]
 
+  redis:
+    image: docker.io/redis:8.6
+    logging:
+      driver: "local"
+      options:
+        max-size: "10m"
+        max-file: 5
+    profiles: [all, debug]
+
   mailpit:
     image: axllent/mailpit
     container_name: tesys_tagboard_local_mailpit
