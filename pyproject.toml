@@ -211,7 +211,7 @@ dependencies = [
   "jwt>=1.4.0",
   "markdown>=3.10",
   "more-itertools>=10.8.0",
-  "pillow==12.1.1",
+  "pillow>=12.2",
   "psycopg2>=2.9.11",
   "psycopg[c]==3.3.3",
   "python-magic>=0.4.27",
