@@ -4,6 +4,7 @@
 {% get_current_language as LANGUAGE_CODE %}
 <html lang="{{ LANGUAGE_CODE }}"
       data-theme="{{ request.session.theme|default:DEFAULT_THEME }}"
+      id="app"
       class="xl:overflow-x-auto overflow-x-clip touch-manipulation">
   <head>
     <meta charset="utf-8" />

@@ -1,0 +1,9 @@
+{% extends "admin/base.html" %}
+
+{% load tailwind_tags %}
+
+{% block extrastyle %}
+  {{ block.super }}
+  {% tailwind_preload_css %}
+  {% tailwind_css %}
+{% endblock extrastyle %}
