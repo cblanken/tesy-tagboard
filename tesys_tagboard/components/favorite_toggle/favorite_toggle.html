@@ -1,6 +1,8 @@
-<button class="flex favorite-button align-center btn btn-secondary"
-        hx-swap="outerHTML"
-        {% if post.favorited %} hx-delete="{% url 'remove-favorite' post_id=post.pk %}" {% else %} hx-put="{% url 'add-favorite' post_id=post.pk %}" {% endif %}>
-  <div class="hidden sm:block">Favorite</div>
-  <div id="post-{{ post.pk }}-fav">{% include "icons/feather.html" with icon="heart" fill=post.favorited %}</div>
-</button>
+{% if perms.tesys_tagboard.add_favorite or perms.tesys_tagoboard.delete_favorite %}
+  <button class="flex favorite-button align-center btn btn-secondary"
+          hx-swap="outerHTML"
+          {% if post.favorited %} hx-delete="{% url 'remove-favorite' post_id=post.pk %}" {% else %} hx-put="{% url 'add-favorite' post_id=post.pk %}" {% endif %}>
+    <div class="hidden sm:block">Favorite</div>
+    <div id="post-{{ post.pk }}-fav">{% include "icons/feather.html" with icon="heart" fill=post.favorited %}</div>
+  </button>
+{% endif %}
