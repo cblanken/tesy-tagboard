@@ -2547,7 +2547,7 @@ requires-dist = [
     { name = "django-anymail", extras = ["mailgun", "mailtrap"], specifier = "==14.0" },
     { name = "django-browser-reload", specifier = ">=1.21.0" },
     { name = "django-colorfield", specifier = ">=0.14.0" },
-    { name = "django-components", specifier = ">=0.143.1" },
+    { name = "django-components", specifier = ">=0.150.0" },
     { name = "django-cors-headers", specifier = "==4.9.0" },
     { name = "django-crispy-forms", specifier = "==2.5" },
     { name = "django-environ", specifier = "==0.13.0" },
