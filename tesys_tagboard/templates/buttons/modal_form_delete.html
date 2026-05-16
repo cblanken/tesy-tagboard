@@ -1,7 +1,7 @@
 <button hx-get="{{ url }}"
         hx-target="#modal_form_wrapper"
         hx-swap="innerHTML"
-        class="w-full btn btn-error btn-lg btn-soft shrink md:w-fit">
+        class="w-full btn btn-error btn-lg shrink md:w-fit">
   <span class="hidden md:block">{{ text }}</span>
   {% include "icons/feather.html" with icon="x" size="lg" %}
 </button>

@@ -17,22 +17,12 @@
         <h3 class="overflow-x-auto m-0 text-2xl font-bold text-wrap overflow-y-clip h-fit">{{ tag_path }}</h3>
         <div class="flex gap-2 items-center">
           {% if perms.tesys_tagboard.change_tagcategory %}
-            <button hx-get="{% url 'update-tag-category' tag_category_id=tags.0.category.pk %}"
-                    hx-target="#modal_form_wrapper"
-                    hx-swap="innerHTML"
-                    class="btn btn-warning btn-lg btn-soft">
-              <span class="md:block">{% translate "Edit" %}</span>
-              {% include "icons/feather.html" with icon="edit" %}
-            </button>
+            {% url 'update-tag-category' tag_category_id=tags.0.category.pk as edit_tag_category_url %}
+            {% include "buttons/modal_form_edit.html" with text=_("Edit") url=edit_tag_category_url %}
           {% endif %}
           {% if perms.tesys_tagboard.delete_tagcategory %}
-            <button hx-get="{% url 'delete-tag-category' tag_category_id=tags.0.category.pk %}"
-                    hx-target="#modal_form_wrapper"
-                    hx-swap="innerHTML"
-                    class="btn btn-error btn-lg btn-soft">
-              <span class="md:block">{% translate "Delete" %}</span>
-              {% include "icons/feather.html" with icon="x" %}
-            </button>
+            {% url 'delete-tag-category' tag_category_id=tags.0.category.pk as delete_tag_category_url %}
+            {% include "buttons/modal_form_delete.html" with text=_("Delete") url=delete_tag_category_url %}
           {% endif %}
         </div>
       </div>
