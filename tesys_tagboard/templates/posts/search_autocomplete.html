@@ -14,8 +14,8 @@
           tabindex="-1"
           {% if item.is_tag_item %} style="{% include 'search/tag_color_styles.html' with category=item.tag_category %}" {% endif %}
           class="max-w-full rounded-none border-b-0 focus:font-bold focus:outline-none border border-neutral/80 text-tag-content {% if item.is_tag_item %}bg-tag text-tag-content{% else %}bg-filter text-filter-content{% endif %} last:border-b hover:brightness-115 focus:brightness-115">
-        <div class="flex justify-between max-h-8 rounded-none">
-          <div class="inline-flex overflow-hidden gap-2 items-center grow-0 max-w-9/10 h-fit min-h-10">
+        <div class="flex justify-between rounded-none">
+          <div class="inline-flex overflow-hidden gap-2 items-center grow-0 max-w-9/10 h-fit">
             {% if item.alias %}
               <div>{% include "icons/feather.html" with icon="corner-down-right" %}</div>
             {% elif item.token_category.name == "TAG" %}
