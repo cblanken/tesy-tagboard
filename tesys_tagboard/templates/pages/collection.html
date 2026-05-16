@@ -11,13 +11,14 @@
       <div>
         <h1>{{ collection.name }}</h1>
         <p class="text-placeholder text-md">{{ collection.desc }}</p>
+        <div class="inline-flex gap-3">{% include "nav/user_link.html" with user=collection.user %}</div>
       </div>
       <div class="flex gap-2 items-center">
-        {% if perms.tesys_tagboard.change_collection %}
+        {% if perms.tesys_tagboard.change_collection and collection.user == request.user %}
           {% url "update-collection" collection_id=collection.pk as update_collection_url %}
           {% include "buttons/modal_form_edit.html" with text=_("Edit") url=update_collection_url %}
         {% endif %}
-        {% if perms.tesys_tagboard.delete_collection %}
+        {% if perms.tesys_tagboard.delete_collection and collection.user == request.user %}
           {% url "delete-collection" collection_id=collection.pk as delete_collection_url %}
           {% include "buttons/modal_form_delete.html" with text=_("Delete") url=delete_collection_url %}
         {% endif %}
