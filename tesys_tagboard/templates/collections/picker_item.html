@@ -1,14 +1,15 @@
 <!-- The `text` variable overrides collection name and description -->
 <li id="post-{{ post.pk }}-collection-{{ collection.pk }}"
-    class="relative p-0 w-52 font-bold collection-picker-item group menu z-1 hover:bg-accent hover:text-accent-content">
-  <button data-collection="{{ collection.pk }}" class="p-2 w-full h-full">
+    class="relative p-0 w-52 font-bold collection-picker-item group menu z-1">
+  <button data-collection="{{ collection.pk }}"
+          class="p-2 w-full h-full group-hover:rounded-none">
     <input name="post-in-collection"
            type="checkbox"
            class="inline checkbox-sm"
            {% if checked %}checked{% endif %} />
     <input name="post" type="hidden" value={{ post.pk }} />
     {{ collection.name }}
-    <aside class="hidden absolute top-0 left-full p-1 min-h-full text-sm rounded-none group-hover:block min-w-40 h-content bg-info text-info-content">
+    <aside class="hidden absolute top-0 left-full p-1 min-h-full text-sm rounded-none border-2 group-hover:block min-w-40 h-content bg-base-300 border-info/80">
       {{ collection.desc }}
     </aside>
   </button>

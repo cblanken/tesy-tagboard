@@ -10,9 +10,11 @@
     </div>
   </button>
   <ul tabindex="-1"
-      class="top-full p-2 mt-1 rounded-field dropdown-content bg-base-300 text-base-content first:rounded-t-field last:rounded-b-field">
-    {% url "create-collection" as create_collection_url %}
-    {% include "buttons/modal_form_create.html" with text=_("Create a collection") url=create_collection_url %}
+      class="top-full p-2 mt-1 rounded-field dropdown-content bg-base-200 text-base-content first:rounded-t-field last:rounded-b-field">
+    <div class="mb-2">
+      {% url "create-collection" as create_collection_url %}
+      {% include "buttons/modal_form_create.html" with text=_("Create a collection") url=create_collection_url %}
+    </div>
     {% if collections %}
       {% for collection in collections %}
         <div hx-on="click"
