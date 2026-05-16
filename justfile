@@ -149,6 +149,7 @@ redis:
     @echo "Connecting to the Redis CLI..."
     @docker compose exec redis redis-cli
 
+alias clear-cache := flush-cache
 # Flush all entries from the caching backend
 flush-cache:
     @echo "Flushing all entries of the cache..."
