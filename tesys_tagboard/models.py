@@ -896,7 +896,7 @@ class FavoriteQuerySet(models.QuerySet):
 
     def with_gallery_data(self):
         return self.select_related("post", "post", "post__image").prefetch_related(
-            "post__tags"
+            "post__tags", "post__tags__category"
         )
 
 
