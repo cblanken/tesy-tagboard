@@ -1170,7 +1170,6 @@ def remove_post_from_collection(
         )
     except Post.DoesNotExist, Collection.DoesNotExist:
         return HttpResponse(status=404)
-    return HttpResponse("Not allowed", status=403)
 
 
 @require(["POST"])
