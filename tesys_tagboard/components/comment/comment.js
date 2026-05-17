@@ -96,7 +96,7 @@
   let comments = get_comments();
   setup(comments);
 
-  document.addEventListener("htmx:after:request", e => {
+  document.addEventListener("htmx:after:settle", e => {
     // Re-setup comment event listeners when an edit is made
     // TODO: target only edited comment instead of running setup over all comments
     let comments = get_comments();
