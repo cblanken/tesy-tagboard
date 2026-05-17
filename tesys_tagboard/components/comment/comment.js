@@ -6,6 +6,9 @@
     const comment_edit_form = comment.querySelector(".comment-edit-form");
     const comment_edit_mode_form = comment.querySelector(".comment-edit-mode-form");
     const comment_edit_form_textarea = comment_edit_form.querySelector("textarea");
+    const comment_id = comment.dataset?.comment;
+    const comment_edit_confirm_btn = document.querySelector(`#comment-confirm-btn-${comment_id}`);
+    const comment_edit_cancel_btn = document.querySelector(`#comment-cancel-btn-${comment_id}`);
 
     // Set textarea cursor to last position
     comment_edit_form_textarea.selectionStart = comment_edit_form_textarea.textContent.length
@@ -22,6 +25,12 @@
         comment_text.classList.remove("hidden");
       }
     }
+
+    comment_edit_form_textarea.addEventListener("input", e => {
+      // Enable comment confirm and cancel buttons
+      comment_edit_confirm_btn.classList.remove("btn-disabled");
+      comment_edit_cancel_btn.classList.remove("btn-disabled");
+    });
 
     // Show more/less comment text
     const show_more_btn = comment.querySelector(".show-more-btn")

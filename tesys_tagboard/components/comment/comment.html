@@ -30,13 +30,15 @@
                   hx-target="[data-comment='{{ comment.pk }}']"
                   hx-swap="outerHTML"
                   hx-confirm="Are you sure you want to update this post?"
-                  class="inline-flex items-center mt-2 comment-edit-submit btn btn-sm btn-success"
+                  id="comment-confirm-btn-{{ comment.pk }}"
+                  class="inline-flex items-center mt-2 btn-disabled comment-edit-submit btn btn-sm btn-success"
                   type="submit">
             {% include "icons/feather.html" with icon="check-square" %}
             <div>Confirm</div>
           </button>
           <button type="button"
-                  class="inline-flex items-center mt-2 ml-1 comment-edit-cancel btn btn-sm btn-error">
+                  id="comment-cancel-btn-{{ comment.pk }}"
+                  class="inline-flex items-center mt-2 ml-1 btn-disabled comment-edit-cancel btn btn-sm btn-error">
             {% include "icons/feather.html" with icon="x-square" %}
             <div>Cancel</div>
           </button>
@@ -44,7 +46,7 @@
       </form>
     </div>
     {% if request.user == comment.user %}
-      <div class="flex gap-2 place-self-end">
+      <div class="flex overflow-hidden gap-2 place-self-end">
         <form action=""
               class="comment-edit-mode-form"
               id="comment-edit-mode-{{ comment.pk }}">
