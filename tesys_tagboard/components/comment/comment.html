@@ -14,18 +14,19 @@
       <div>{{ comment.post_date|naturaltime }}</div>
     </div>
   </div>
-  <div class="comment-body relative min-h-fit max-h-45 overflow-y-hidden sm:bg-i sm:overflow-y-auto sm:bg-clip-border sm:bg-none sm:text-base-content to-none bg-clip-text bg-linear-to-b text-transparent from-base-content from-65% to-transparent to-100% pb-2">
+  <div class="comment-body relative min-h-fit max-h-45 overflow-y-hidden sm:bg-i sm:overflow-y-auto sm:bg-clip-border sm:bg-none sm:text-base-content to-none bg-clip-text bg-linear-to-b text-transparent from-base-content from-65% to-transparent to-100%">
     <button class="absolute right-1 bottom-1 invisible text-sm show-more-btn btn btn-xs btn-info">Show more</button>
     <div class="px-1 my-2 w-full min-h-10">
       <div class="comment-text">{{ comment.text }}</div>
       <form class="hidden comment-edit-form">
         <input type="hidden" name="comment_id" value="{{ comment.pk }}" />
         <textarea maxlength="1000"
+                  id="comment-text-{{ comment.pk }}"
                   name="text"
                   class="w-full text-base text-wrap h-30 input textarea max-h-100 focus:input-secondary">{{comment.text}}</textarea>
         <div class="flex gap-1 items-center">
           <button hx-post="{% url 'post-edit-comment' %}"
-                  hx-include="inherit, [name='text']"
+                  hx-include="inherit, #comment-text-{{ comment.pk }}[name='text']"
                   hx-target="[data-comment='{{ comment.pk }}']"
                   hx-swap="outerHTML"
                   hx-confirm="Are you sure you want to update this post?"

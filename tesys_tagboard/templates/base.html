@@ -35,8 +35,8 @@
       <!-- Global project Javascript -->
       <script defer src="{% static 'js/project.js' %}"></script>
       <!-- Third-party JavaScript libraries -->
-      <!-- Stopgap to enable htmx 2.x behavior until 4.x migration is complete-->
       <script src="{% static 'js/vendor/htmx/htmx-4.0.0-beta2.min.js' %}"></script>
+      <!-- Stopgap to enable htmx 2.x behavior until 4.x migration is complete-->
       <script>
         htmx.config.implicitInheritance = true;
         htmx.config.noSwap = [204, 304, '4xx', '5xx'];
