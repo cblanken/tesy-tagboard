@@ -18,5 +18,4 @@ venv
 staticfiles
 node_modules
 tesys_tagboard/media/
-tesys_tagboard/theme/static/
 docker-compose*.yml
