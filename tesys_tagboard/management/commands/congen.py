@@ -204,10 +204,7 @@ def create_random_users(n: int = 50):
         random_user_names = fake.words(
             n, ext_word_list=[fake.user_name() for _ in range(n * 2)], unique=True
         )
-        users = [
-            User(username=name, password=fake.password(20))
-            for name in random_user_names
-        ]
+        users = [User(username=name) for name in random_user_names]
         random_users = User.objects.bulk_create(users)
         for user in random_users:
             user.save()
