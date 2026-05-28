@@ -35,6 +35,7 @@ tag_urls = [
     path("create/", views.create_tag, name="create-tag"),
     path("delete/<int:tag_id>/", views.delete_tag, name="delete-tag"),
     path("update/<int:tag_id>/", views.update_tag, name="update-tag"),
+    path("restore/<int:tag_id>/", views.restore_tag, name="restore-tag"),
 ]
 
 tag_alias_urls = [

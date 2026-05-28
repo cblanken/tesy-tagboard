@@ -3,7 +3,7 @@
           {% if actions %}role="button"{% endif %}
           type="button"
           style="{% include 'search/tag_color_styles.html' with category=category %}"
-          class="btn {% if size == "xs" %}btn-xs{% elif size == "sm" %}btn-sm{% elif size == "lg" %}btn-lg{% else %}btn-md{% endif %}">
+          class="btn {% if size == "xs" %}btn-xs{% elif size == "sm" %}btn-sm{% elif size == "lg" %}btn-lg{% else %}btn-md{% endif %} {% if tag.deleted %}saturate-[.25] border-2 border-dashed border-base-content{% endif %}">
     <div class="inline-flex gap-1 items-center w-fit nowrap">
       {% if alias %}
         {% include "icons/feather.html" with icon="corner-down-right" %}

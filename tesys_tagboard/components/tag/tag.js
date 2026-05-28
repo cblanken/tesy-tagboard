@@ -47,6 +47,10 @@
               htmx.ajax("GET", `/tags/tag/delete/${tag_id}/`, { target: "#modal_form_wrapper" });
               console.log(`Request to delete the tag with id=${tag_id}.`)
               break;
+            case "restore-tag":
+              htmx.ajax("GET", `/tags/tag/restore/${tag_id}/`, { target: "#modal_form_wrapper" });
+              console.log(`Request to restore the deleted tag with id=${tag_id}.`)
+              break;
             case "update-alias":
               htmx.ajax("GET", `/tags/alias/update/${alias_id}/`, { target: "#modal_form_wrapper" });
               console.log(`Request to update the tag alias with id=${alias_id}.`)
