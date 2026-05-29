@@ -49,6 +49,7 @@ class TagCategoryFactory(DjangoModelFactory[TagCategory]):
 class TagFactory(DjangoModelFactory[Tag]):
     name = Sequence(lambda n: f"tag{n}")
     category = None
+    deleted = False
     rating_level = Faker("enum", enum_cls=RatingLevel)
 
     class Meta:
