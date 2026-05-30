@@ -153,8 +153,15 @@ class TagCategory(models.Model):
 
 
 class TagManager(models.Manager):
-    def get_queryset(self):
-        return TagQuerySet(self.model, using=self._db)
+    def get_queryset(self, *, include_deleted: bool = False):
+        if include_deleted:
+            return TagQuerySet(self.model, using=self._db)
+        return TagQuerySet(self.model, using=self._db).filter(deleted=False)
+
+    def with_deleted(self):
+        """Note this must be called as the first method on a query. Otherwise, tags
+        with the `deleted` attribute set won't be included."""
+        return self.get_queryset(include_deleted=True)
 
     def for_post(self, post: Post):
         """Return tags and related category data for a specific `post`"""
@@ -165,11 +172,14 @@ class TagManager(models.Manager):
         return self.get_queryset().in_tagset(tagset)
 
     def for_user(self, user: User):
-        """Retrive Tags excluding any filtered tags from the User's settings"""
+        """Retrieve Tags excluding any filtered tags from the User's settings"""
         return self.get_queryset().for_user(user)
 
 
 class TagQuerySet(models.QuerySet):
+    def with_deleted(self):
+        return self
+
     def for_post(self, post: Post):
         return self.select_related("category").filter(post=post)
 
@@ -340,7 +350,7 @@ class PostQuerySet(models.QuerySet):
 
     def with_gallery_data(self, user: User):
         prefetch_tags = Tag.tags.select_related("category").only(
-            "name", "id", "category", "post_count"
+            "name", "id", "category", "post_count", "deleted"
         )
         posts = (
             self.defer(
@@ -486,6 +496,7 @@ class Tag(models.Model):
         category: CharField(2)
         description: TextField(255)
         post_count: PositiveIntegerField
+        deleted: BooleanField
         rating_level: PositiveSmallIntegerField
     """
 
@@ -495,6 +506,11 @@ class Tag(models.Model):
     )
     description = models.TextField(max_length=255, blank=True, default="")
     post_count = models.PositiveIntegerField(default=0)
+    deleted = models.BooleanField(
+        default=False,
+        blank=True,
+        db_comment="If a tag has been soft deleted",
+    )
 
     """Rating levels to filter content. This field allows any tag to apply a rating
     """
@@ -508,6 +524,10 @@ class Tag(models.Model):
         verbose_name = _("tag")
         verbose_name_plural = _("tags")
         ordering = ["category", "-post_count"]
+        permissions = [
+            ("view_deleted_tags", "Can view deleted tags"),
+            ("restore_deleted_tags", "Can restore deleted tags"),
+        ]
         constraints = [
             models.UniqueConstraint(
                 fields=["name", "category"],
@@ -524,6 +544,19 @@ class Tag(models.Model):
     def __repr__(self) -> str:
         return f"<Tag - {self.name}, category: {self.category}>"
 
+    def delete(self, *args, **kwargs):
+        """Soft delete tags by default"""
+        hard_delete = kwargs.get("hard", False)
+        if hard_delete:
+            return super().delete(*args, **kwargs)
+        self.deleted = True
+        self.save(update_fields=[Tag.deleted.field.name])
+        return (0, {})
+
+    def restore(self):
+        self.deleted = False
+        self.save(update_fields=[Tag.deleted.field.name])
+
     def get_full_path(self, max_depth: int = 5) -> str:
         """Return the tag and category chain up to the root or up to a `max_depth`
         of categories"""
@@ -538,8 +571,15 @@ class Tag(models.Model):
 
 
 class TagAliasManager(models.Manager):
-    def get_queryset(self):
-        return TagAliasQuerySet(self.model, using=self._db)
+    def get_queryset(self, *, include_deleted_tags: bool = False):
+        if include_deleted_tags:
+            return TagAliasQuerySet(self.model, using=self._db)
+        return TagAliasQuerySet(self.model, using=self._db).filter(tag__deleted=False)
+
+    def with_deleted_tags(self):
+        """Note this must be called as the first method on a query. Otherwise, tags
+        with the `deleted` attribute will be filtered out."""
+        return self.get_queryset(include_deleted_tags=True)
 
     def for_user(self, user: User):
         """Retrive TagAliases excluding any filtered tags from the User's settings"""
@@ -547,6 +587,9 @@ class TagAliasManager(models.Manager):
 
 
 class TagAliasQuerySet(models.QuerySet):
+    def with_deleted_tags(self):
+        return self
+
     def for_user(self, user: User):
         """Retrive TagAliases excluding any filtered tags from the User's settings"""
         return self.exclude(tag__in=user.filter_tags.all())

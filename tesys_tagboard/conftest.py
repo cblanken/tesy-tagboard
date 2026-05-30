@@ -33,6 +33,20 @@ def user_with_add_tag(db) -> User:
 
 
 @pytest.fixture
+def user_with_delete_tag(db) -> User:
+    return UserFactory().with_permissions(
+        [Permission.objects.get(codename="delete_tag")]
+    )
+
+
+@pytest.fixture
+def user_with_restore_deleted_tags(db) -> User:
+    return UserFactory().with_permissions(
+        [Permission.objects.get(codename="restore_deleted_tags")]
+    )
+
+
+@pytest.fixture
 def user_with_add_tagalias(db) -> User:
     return UserFactory().with_permissions(
         [Permission.objects.get(codename="add_tagalias")]

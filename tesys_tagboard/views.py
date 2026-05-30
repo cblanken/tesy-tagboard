@@ -117,7 +117,6 @@ def home(request: HttpRequest) -> TemplateResponse:
 
 @require(["GET"], login=False)
 def post(request: HtmxHttpRequest, post_id: int) -> TemplateResponse | HttpResponse:
-    # GET request
     all_posts = Post.posts.order_by("post_date").values("pk", "post_date")
     previous_post = None
     next_post = None
@@ -139,7 +138,12 @@ def post(request: HtmxHttpRequest, post_id: int) -> TemplateResponse | HttpRespo
     comments_pager = Paginator(comments, 10, 5)
     comments_page_num = request.GET.get("page", 1)
     comments_page = comments_pager.get_page(comments_page_num)
-    tags = Tag.tags.for_post(post)
+    tags = (
+        Tag.tags.with_deleted()
+        if request.user.has_perm("view_deleted_tags")
+        else Tag.tags
+    )
+    tags = tags.for_post(post)
 
     post_tag_snapshots = post.posttaghistory_set.order_by("mod_time")
     post_tag_history_tag_ids = [
@@ -332,9 +336,14 @@ def posts(request: HtmxHttpRequest) -> TemplateResponse | HttpResponse:
 @require(["GET", "POST"], login=False)
 def tags(request: HtmxHttpRequest) -> TemplateResponse | HttpResponse:
     categories = TagCategory.objects.order_by("-parent", "name")
+    tags = (
+        Tag.tags.with_deleted()
+        if request.user.has_perm("view_deleted_tags", Tag)
+        else Tag.tags
+    )
     try:
         query = request.GET.get("q", "").strip()
-        uncategorized_tags = Tag.tags.select_related("category").filter(category=None)
+        uncategorized_tags = tags.select_related("category").filter(category=None)
         if query != "":
             uncategorized_tags = uncategorized_tags.filter(name__icontains=query)
 
@@ -353,7 +362,7 @@ def tags(request: HtmxHttpRequest) -> TemplateResponse | HttpResponse:
         order_by_expr.append("name")
 
         categorized_tags = (
-            Tag.tags.select_related(*select_related_expr)
+            tags.select_related(*select_related_expr)
             .filter(Q(category__name__icontains=query) | Q(name__icontains=query))
             .filter(~Q(category=None))
             .order_by(*order_by_expr)
@@ -367,7 +376,12 @@ def tags(request: HtmxHttpRequest) -> TemplateResponse | HttpResponse:
 
         alias_query = request.GET.get("aliases", "")
         aliases = (
-            TagAlias.aliases.filter(name__icontains=alias_query)
+            TagAlias.aliases.with_deleted_tags()
+            if request.user.has_perm("view_deleted_tags")
+            else TagAlias.aliases
+        )
+        aliases = (
+            aliases.filter(name__icontains=alias_query)
             .select_related("tag", "tag__category")
             .order_by(F("tag__category__name").asc(nulls_first=True))
         )
@@ -377,8 +391,8 @@ def tags(request: HtmxHttpRequest) -> TemplateResponse | HttpResponse:
     context = {
         "uncategorized_tags": uncategorized_tags,
         "tags_by_cat": tags_by_cat,
-        "tag_count": Tag.tags.count(),
-        "tag_alias_count": TagAlias.aliases.count(),
+        "tag_count": tags.count(),
+        "tag_alias_count": aliases.count(),
         "tag_category_count": TagCategory.objects.count(),
         "tag_name": query,
         "aliases": aliases,
@@ -527,7 +541,7 @@ def delete_tag(
 
     if request.method == "DELETE":
         try:
-            tag = Tag.tags.get(pk=tag_id)
+            tag = Tag.tags.get(pk=tag_id, deleted=False)
             tag.delete()
         except Tag.DoesNotExist:
             msg = Message(messages.ERROR, _("A tag with the given ID does not exist."))
@@ -552,6 +566,56 @@ def delete_tag(
         return TemplateResponse(request, "modals/form.html#form-body", ctx)
     return HttpResponse(
         "Tag could not be created", status=HTTPStatus.METHOD_NOT_ALLOWED
+    )
+
+
+@require(["GET", "POST"])
+@permission_required(["tesys_tagboard.restore_deleted_tags"], raise_exception=True)
+def restore_tag(
+    request: HtmxHttpRequest, tag_id: int
+) -> TemplateResponse | HttpResponse:
+    modal_messages = []
+    ctx = {
+        "method": "POST",
+        # Translators: title  for "Delete Tag" modal form
+        "title": _("Restore tag"),
+        "action_url": reverse("restore-tag", args=[tag_id]),
+        # Translators: label for "Delete Tag" submit button
+        "submit_btn_text": _("Restore"),
+        "color": "info",
+        # Translators: tag deletion confirmation message
+        "body": _("Are you sure you want to restore this tag?"),
+    }
+    if request.method == "GET":
+        return TemplateResponse(request, "modals/form.html", ctx)
+
+    if request.method == "POST":
+        try:
+            tag = Tag.tags.with_deleted().get(pk=tag_id, deleted=True)
+            tag.restore()
+        except Tag.DoesNotExist:
+            msg = Message(messages.ERROR, _("This tag has already been restored."))
+        except DatabaseError:
+            msg = Message(
+                messages.ERROR,
+                _(
+                    'The tag with an ID of "%s" could not be deleted because of a '
+                    "database error."
+                )
+                % tag_id,
+            )
+        else:
+            msg = Message(
+                messages.SUCCESS,
+                _('The tag "%s" was restored.') % tag.name,
+            )
+
+        modal_messages.append(msg)
+
+        ctx |= {"modal_messages": modal_messages}
+        return TemplateResponse(request, "modals/form.html#form-body", ctx)
+    return HttpResponse(
+        "Tag could not be restored", status=HTTPStatus.METHOD_NOT_ALLOWED
     )
 
 

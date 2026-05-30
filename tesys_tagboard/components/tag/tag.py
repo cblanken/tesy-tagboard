@@ -36,7 +36,7 @@ class TagComponent(Component):
     js_file = "tag.js"
 
     def get_template_data(self, args, kwargs, slots, context):
-        tag = kwargs.get("tag")
+        tag: Tag = kwargs.get("tag")
         alias = kwargs.get("alias")
         tag = alias.tag if alias else kwargs.get("tag")
         perms: PermWrapper | None = context.get("perms")
@@ -66,17 +66,27 @@ class TagComponent(Component):
         delete_tag_action = Action(
             "delete-tag",
             display=_("Delete tag"),
-            desc=_("Delete this tag from all posts"),
+            desc=_("Delete this tag"),
+            tag=tag,
+        )
+
+        restore_tag_action = Action(
+            "restore-tag",
+            display=_("Restore tag"),
+            desc=_("Restore this tag"),
             tag=tag,
         )
 
         actions = [search_action]
 
-        if perms and perms["tesys_tagboard"]["change_tag"]:
+        if not tag.deleted and perms and perms["tesys_tagboard"]["change_tag"]:
             actions.append(update_tag_action)
 
-        if perms and perms["tesys_tagboard"]["delete_tag"]:
+        if not tag.deleted and perms and perms["tesys_tagboard"]["delete_tag"]:
             actions.append(delete_tag_action)
+
+        if tag.deleted and perms and perms["tesys_tagboard"]["restore_deleted_tags"]:
+            actions.append(restore_tag_action)
 
         if alias:
             update_alias_action = Action(

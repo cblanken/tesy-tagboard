@@ -4,6 +4,8 @@ from tesys_tagboard.models import Tag
 
 from .factories import TagFactory
 
+# NOTE: fixtures are defined in tesys_tagboard/conftest.py
+
 
 @pytest.mark.django_db
 class TestLikeLookup:
@@ -68,3 +70,24 @@ class TestLikeLookup:
         assert tag2 in tags
         assert tag3 not in tags
         assert tag4 not in tags
+
+
+@pytest.mark.django_db(transaction=True)
+class TestTagManager:
+    def test_soft_delete(self):
+        tag = TagFactory.create(name="soft_delete_tag")
+        tag.delete()
+        tag.refresh_from_db(fields=["deleted"])
+        assert tag.deleted
+
+    def test_hard_delete(self):
+        tag = TagFactory.create(name="hard_delete_tag")
+        tag.delete(hard_delete=True)
+        with pytest.raises(Tag.DoesNotExist):
+            Tag.tags.get(pk=tag.pk)
+
+    def test_restore_deleted_tag(self):
+        tag = TagFactory.create(name="abc", deleted=True)
+        assert tag.deleted
+        tag.restore()
+        assert not tag.deleted

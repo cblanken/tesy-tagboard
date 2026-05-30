@@ -23,7 +23,7 @@ from .factories import (
     TagFactory,
 )
 
-# NOTE: most fixtures are defined in conftest.py
+# NOTE: fixtures are defined in tesys_tagboard/conftest.py
 
 
 @pytest.mark.django_db
@@ -142,6 +142,59 @@ class TestCreateTagView:
 
         with pytest.raises(Tag.DoesNotExist):
             Tag.tags.get(name=tag_name)
+
+
+@pytest.mark.django_db(transaction=True)
+class TestDeleteTagView:
+    def test_delete_tag_without_perm(self, client):
+        """A user without the delete_tag permission cannot delete a tag"""
+        user = UserFactory()
+        client.force_login(user)
+
+        tag = TagFactory(name="not_deleted")
+        url = reverse("delete-tag", args=[tag.pk])
+        response = client.delete(url)
+        assert response.status_code == HTTPStatus.FORBIDDEN
+        assert Tag.tags.filter(pk=tag.pk, name=tag.name).exists()
+
+    def test_soft_delete_tag_with_perm(self, client, user_with_delete_tag):
+        """A user with the delete_tag permission can delete a tag"""
+        client.force_login(user_with_delete_tag)
+        tag = TagFactory(name="deleted")
+        url = reverse("delete-tag", args=[tag.pk])
+        response = client.delete(url)
+        assert response.status_code == HTTPStatus.OK
+        tag.refresh_from_db(fields=["deleted"])
+        assert tag.deleted
+
+
+@pytest.mark.django_db(transaction=True)
+class TestRestoreTagView:
+    def test_restore_deleted_tag_without_perm(self, client):
+        """
+        A user without the restore_deleted_tags permission cannot restore
+        a deleted tag
+        """
+        user = UserFactory()
+        client.force_login(user)
+
+        tag = TagFactory.create(name="deleted_tag", deleted=True)
+        url = reverse("restore-tag", args=[tag.pk])
+        response = client.post(url)
+        assert response.status_code == HTTPStatus.FORBIDDEN
+        assert tag.deleted
+
+    def test_restore_deleted_tag_with_perm(
+        self, client, user_with_restore_deleted_tags
+    ):
+        """A user with the restore_deleted_tags permission can delete a tag"""
+        client.force_login(user_with_restore_deleted_tags)
+        tag = TagFactory.create(name="deleted_tag", deleted=True)
+        url = reverse("restore-tag", args=[tag.pk])
+        response = client.post(url)
+        assert response.status_code == HTTPStatus.OK
+        tag.refresh_from_db(fields=["deleted"])
+        assert not tag.deleted
 
 
 @pytest.mark.django_db(transaction=True)
