@@ -25,7 +25,7 @@
                   name="text"
                   class="w-full text-base text-wrap h-30 input textarea max-h-100 focus:input-secondary">{{comment.text}}</textarea>
         <div class="flex gap-1 items-center">
-          <button hx-post="{% url 'post-edit-comment' %}"
+          <button hx-post="{% url 'edit-post-comment' %}"
                   hx-include="inherit, #comment-text-{{ comment.pk }}[name='text']"
                   hx-target="[data-comment='{{ comment.pk }}']"
                   hx-swap="outerHTML"
@@ -67,7 +67,7 @@
           <input type="hidden" name="comment_id" value="{{ comment.pk }}" />
           <button type="submit"
                   class="flex gap-1 items-center btn btn-sm btn-error"
-                  hx-post="{% url 'post-delete-comment' %}"
+                  hx-post="{% url 'delete-post-comment' %}"
                   hx-target="#post-comments"
                   hx-swap="innerHTML"
                   hx-confirm="Are you sure you want to delete this comment?">

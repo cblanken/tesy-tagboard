@@ -209,10 +209,10 @@ class TestCreateTagAliasView:
 @pytest.mark.django_db
 class TestCommenting:
     def add_comment_url(self, pk):
-        return reverse("post-add-comment", args=[pk])
+        return reverse("add-post-comment", args=[pk])
 
-    edit_comment_url = reverse("post-edit-comment")
-    delete_comment_url = reverse("post-delete-comment")
+    edit_comment_url = reverse("edit-post-comment")
+    delete_comment_url = reverse("delete-post-comment")
 
     def test_add_comment_without_perm(self, client):
         """Users without the `add_comment` permission may not add commennts"""
@@ -379,13 +379,13 @@ class TestPostView:
         return reverse("post", args=[pk])
 
     def edit_url(self, pk):
-        return reverse("post-edit", args=[pk])
+        return reverse("edit-post", args=[pk])
 
     def delete_url(self, pk):
-        return reverse("post-delete", args=[pk])
+        return reverse("delete-post", args=[pk])
 
     def lock_comments_url(self, pk):
-        return reverse("post-toggle-comment-lock", args=[pk])
+        return reverse("toggle-post-comment-lock", args=[pk])
 
     def test_view_post(self, client):
         post = PostFactory.create()

@@ -17,16 +17,16 @@ post_urls = [
     path("", views.posts, name="posts"),
     path("autocomplete/", views.post_search_autocomplete, name="autocomplete"),
     path("<int:post_id>/", views.post, name="post"),
-    path("<int:post_id>/add-comment/", views.add_comment, name="post-add-comment"),
-    path("<int:post_id>/delete/", views.delete_post, name="post-delete"),
-    path("<int:post_id>/edit/", views.edit_post, name="post-edit"),
+    path("<int:post_id>/add-comment/", views.add_comment, name="add-post-comment"),
+    path("<int:post_id>/delete/", views.delete_post, name="delete-post"),
+    path("<int:post_id>/edit/", views.edit_post, name="edit-post"),
     path(
         "<int:post_id>/comments/toggle_lock/",
         views.toggle_comment_lock,
-        name="post-toggle-comment-lock",
+        name="toggle-post-comment-lock",
     ),
-    path("comments/edit/", views.edit_comment, name="post-edit-comment"),
-    path("comments/delete/", views.delete_comment, name="post-delete-comment"),
+    path("comments/edit/", views.edit_comment, name="edit-post-comment"),
+    path("comments/delete/", views.delete_comment, name="delete-post-comment"),
 ]
 
 tag_urls = [
