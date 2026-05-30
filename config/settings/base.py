@@ -6,6 +6,7 @@ from pathlib import Path
 
 import environ
 from django.utils.translation import gettext_lazy as _
+from django_components import ComponentsSettings
 
 BASE_DIR = Path(__file__).resolve(strict=True).parent.parent.parent
 # tesys_tagboard/
@@ -280,11 +281,12 @@ TEMPLATES = [
 
 # COMPONENTS
 # ------------------------------------------------------------------------------
-COMPONENTS = {
-    "dirs": [],
-    "app_dirs": ["components"],
-    "reload_on_template_change": True,
-}
+# https://django-components.github.io/django-components/latest/reference/api/?django_components.ComponentsSettings#django_components.ComponentsSettings
+COMPONENTS = ComponentsSettings(
+    dirs=[APPS_DIR / "components"],
+    autodiscover=True,
+    cache="default",
+)
 
 CRISPY_TEMPLATE_PACK = "tailwind"
 CRISPY_ALLOWED_TEMPLATE_PACKS = "tailwind"

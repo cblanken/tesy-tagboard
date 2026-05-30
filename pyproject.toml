@@ -157,6 +157,7 @@ dev = [
   "werkzeug[watchdog]==3.1.6",
   "rstcheck[sphinx,toml]>=6.2.5",
   "taplo>=0.9.3",
+  "django-watchfiles>=1.4.0",
 ]
 
 docs = [
@@ -204,7 +205,6 @@ dependencies = [
   "django-tailwind>=4.3.0",
   "django-template-partials>=25.2",
   "django-typer>=3.5.1",
-  "django-watchfiles>=1.4.0",
   "gunicorn==25.1.0",
   "hiredis==3.3.0",
   "imagehash>=4.3.2",

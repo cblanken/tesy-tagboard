@@ -1,5 +1,7 @@
+from django_components import ComponentsSettings
+
 from .base import *  # noqa: F403
-from .base import INSTALLED_APPS, MIDDLEWARE, env
+from .base import APPS_DIR, INSTALLED_APPS, MIDDLEWARE, env
 
 # GENERAL
 # ------------------------------------------------------------------------------
@@ -63,6 +65,17 @@ if env("USE_DOCKER") == "yes":
 
     hostname, _, ips = socket.gethostbyname_ex(socket.gethostname())
     INTERNAL_IPS += [".".join([*ip.split(".")[:-1], "1"]) for ip in ips]
+
+
+# COMPONENTS
+# ------------------------------------------------------------------------------
+# https://django-components.github.io/django-components/latest/reference/api/?django_components.ComponentsSettings#django_components.ComponentsSettings
+COMPONENTS = ComponentsSettings(
+    dirs=[APPS_DIR / "components"],
+    reload_on_file_change=True,
+    cache="default",
+)
+
 
 # django-extensions
 # ------------------------------------------------------------------------------

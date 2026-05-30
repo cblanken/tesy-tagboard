@@ -1,5 +1,7 @@
+from django_components import ComponentsSettings
+
 from .base import *  # noqa: F403
-from .base import INSTALLED_APPS, env
+from .base import APPS_DIR, INSTALLED_APPS, env
 
 # GENERAL
 # ------------------------------------------------------------------------------
@@ -104,6 +106,14 @@ else:
         "DJANGO_EMAIL_BACKEND",
         default="django.core.mail.backends.smtp.EmailBackend",
     )
+
+# COMPONENTS
+# ------------------------------------------------------------------------------
+# https://django-components.github.io/django-components/latest/reference/api/?django_components.ComponentsSettings#django_components.ComponentsSettings
+COMPONENTS = ComponentsSettings(
+    dirs=[APPS_DIR / "components"],
+    cache="default",
+)
 
 
 # LOGGING
