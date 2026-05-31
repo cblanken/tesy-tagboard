@@ -1,4 +1,4 @@
-exclude: '^docs/|/migrations/|devcontainer.json'
+exclude: '^migrations/|devcontainer.json'
 default_stages: [pre-commit]
 minimum_pre_commit_version: "3.2.0"
 
@@ -32,6 +32,7 @@ repos:
     rev: '1.29.1'
     hooks:
       - id: django-upgrade
+        exclude: '^docs/|migrations/|compose/'
         args: ['--target-version', '5.2']
 
   # Run the Ruff linter hook
@@ -40,22 +41,27 @@ repos:
     hooks:
       # Linter
       - id: ruff-check
+        exclude: '^docs/|migrations/'
         args: [--fix, --exit-non-zero-on-fix]
       # Formatter
       - id: ruff-format
+        exclude: '^docs/|migrations/'
 
   # Run djlint hook
   - repo: https://github.com/Riverside-Healthcare/djLint
     rev: v1.36.4
     hooks:
       - id: djlint-reformat-django
+        exclude: '^docs/|migrations/|compose/'
       - id: djlint-django
+        exclude: '^docs/|migrations/|compose/'
 
   # Run rstcheck lint hook
   - repo: https://github.com/rstcheck/rstcheck
     rev: v6.2.5
     hooks:
       - id: rstcheck
+        exclude: '^migrations/|compose/|tesys_tagboard/'
         additional_dependencies: ['rstcheck[sphinx,toml]']
 
   # Tailwind class ordering commit hook
@@ -64,6 +70,7 @@ repos:
     hooks:
       - id: rustywind
         name: rustywind Tailwind CSS class formatter
+        exclude: '^docs/|migrations/|compose/'
         language: node
         additional_dependencies:
           - rustywind@latest
