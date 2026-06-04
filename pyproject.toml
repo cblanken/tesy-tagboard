@@ -192,7 +192,7 @@ dependencies = [
   "django-anymail[mailgun,mailtrap]==14.0",
   "django-browser-reload>=1.21.0",
   "django-colorfield>=0.14.0",
-  "django-components>=0.150.0",
+  "django-components>=0.151.0",
   "django-cors-headers==4.9.0",
   "django-crispy-forms==2.5",
   "django-environ==0.13.0",
