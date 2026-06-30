@@ -1,5 +1,10 @@
 # Tesy's Tagboard
 
+> [!IMPORTANT]  
+*Tesy's Tagboard has moved to [Codeberg](https://codeberg.org/about). Follow all future development at https://codeberg.org/cblanken/tesys-tagboard*.
+
+----
+
 [![Built with Django](https://img.shields.io/badge/6.0-django?style=flat&logo=django&label=django&labelColor=092E20&color=404242)](https://www.djangoproject.com)
 [![Documentation](https://app.readthedocs.org/projects/tesys-tagboard/badge/?version=latest&style=flat)](https://tesys-tagboard.readthedocs.io)
 
