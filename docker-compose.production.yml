@@ -53,7 +53,7 @@ services:
         required: false
 
   redis:
-    image: docker.io/redis:8.6
+    image: docker.io/redis:8.8
     logging:
       driver: "local"
       options:
